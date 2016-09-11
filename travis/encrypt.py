@@ -8,26 +8,38 @@ import yaml
 
 
 def load_key(key):
-
+    """Deserializes the given key and returns an RSAPublicKey object with the Crypthography
+    module's default backend.
+    """
     return load_pem_public_key(key.encode(), default_backend())
 
 
-def encrypt_key(encoded_key, password):
+def retrieve_public_key(user_repo):
+    """Retrieves the public key from the Travis API and returns it as JSON.
+
+    Argument:
+    user_repo --  the repository in the format of 'username/repository'
     """
-    OAEP(
-        mgf=MGF1(algorithm=SHA256()),
-        algorithm=SHA256(),
-        label=None))"""
-    key = load_key(encoded_key)
-    encrypted_password = key.encrypt(password, PKCS1v15())
-    return base64.b64encode(encrypted_password)
-
-
-def fetch_public_key(user_repo):
-
     url = 'https://api.travis-ci.org/repos/{}/key' .format(user_repo)
     response = requests.get(url)
     return response.json()['key']
+
+
+def encrypt_key(key, password):
+    """Encrypts the given password with the encrypt() method of RSAPublicKey.
+
+    Arguments:
+    key -- public key that requires deserialization
+    password -- password to be encrypted
+
+    Travis CI uses the PKCS1v15 padding scheme. While PKCS1v15 is secure, it is
+    outdated and should be replaced with OAEP.
+
+    OAEP(mgf=MGF1(algorithm=SHA256()), algorithm=SHA256(), label=None))
+    """
+    public_key = load_key(key)
+    encrypted_password = public_key.encrypt(password, PKCS1v15())
+    return base64.b64encode(encrypted_password)
 
 
 @click.command()
@@ -36,7 +48,13 @@ def fetch_public_key(user_repo):
 @click.argument('file', type=click.Path(exists=True))
 @click.password_option()
 def cli(username, repository, file, password):
-    key = fetch_public_key('{}/{}' .format(username, repository))
+    """Encrypt requires as arguments the username, repository, and
+    path to the .travis.yml file. Once the arguments are added, a password
+    prompt will ask for a password and with another prompt to confirm it. The password
+    will then be encrypted via the PKCS1v15 padding scheme, and added to the
+    .travis.yml file that was passed as an argument.
+    """
+    key = retrieve_public_key('{}/{}' .format(username, repository))
     encrypted_password = encrypt_key(key, password.encode())
 
     with open(file) as conffile:
@@ -47,3 +65,4 @@ def cli(username, repository, file, password):
     with open(file, 'w') as conffile:
         yaml.dump(config, conffile, default_flow_style=False)
 
+    print('Password added to .travis.yml')
