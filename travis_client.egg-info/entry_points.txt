@@ -1,4 +1,0 @@
-
-        [console_scripts]
-        travis-encrypt=travis.encrypt:cli
-        
