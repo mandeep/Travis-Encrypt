@@ -39,8 +39,8 @@ With Travis-Encrypt installed, the command line application can be invoked with 
 The application will then issue a mandatory password prompt. Once the password is filled,
 Travis-Encrypt will write the encrypted password to the given .travis.yml file.
 
-.. |travis| image:: https://travis-ci.org/mandeep/Travis-Client.svg?branch=master
-    :target: https://travis-ci.org/mandeep/Travis-Client
+.. |travis| image:: https://travis-ci.org/mandeep/Travis-Encrypt.svg?branch=master
+    :target: https://travis-ci.org/mandeep/Travis-Encrypt
 .. |coverage| image:: https://img.shields.io/coveralls/mandeep/Travis-Encrypt.svg
     :target: https://coveralls.io/github/mandeep/Travis-Encrypt 
 .. |dependencies| image:: https://img.shields.io/librariesio/github/mandeep/Travis-Client.svg
