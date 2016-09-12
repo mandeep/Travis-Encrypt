@@ -7,13 +7,6 @@ import requests
 import yaml
 
 
-def load_key(key):
-    """Deserializes the given key and returns an RSAPublicKey object with the Crypthography
-    module's default backend.
-    """
-    return load_pem_public_key(key.encode(), default_backend())
-
-
 def retrieve_public_key(user_repo):
     """Retrieves the public key from the Travis API and returns it as JSON.
 
@@ -26,7 +19,8 @@ def retrieve_public_key(user_repo):
 
 
 def encrypt_key(key, password):
-    """Encrypts the given password with the encrypt() method of RSAPublicKey.
+    """Loads the public key and returns it as an RSAPublicKey object. Then encrypts the
+    given password with the encrypt() method of RSAPublicKey.
 
     Arguments:
     key -- public key that requires deserialization
@@ -37,7 +31,7 @@ def encrypt_key(key, password):
 
     OAEP(mgf=MGF1(algorithm=SHA256()), algorithm=SHA256(), label=None))
     """
-    public_key = load_key(key)
+    public_key = load_pem_public_key(key.encode(), default_backend())
     encrypted_password = public_key.encrypt(password, PKCS1v15())
     return base64.b64encode(encrypted_password)
 
@@ -65,4 +59,4 @@ def cli(username, repository, file, password):
     with open(file, 'w') as conffile:
         yaml.dump(config, conffile, default_flow_style=False)
 
-    print('Password added to {}' .format(file))
+    print('Encrypted password added to {}' .format(file))
