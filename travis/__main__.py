@@ -1,3 +1,3 @@
-from travis import cli
+from travis.encyrpt import cli
 
 cli()

@@ -40,7 +40,7 @@ def encrypt_key(key, password):
 @click.argument('username')
 @click.argument('repository')
 @click.argument('file', type=click.Path(exists=True))
-@click.password_option()
+@click.option('--password', prompt=True, hide_input=True, confirmation_prompt=False)
 def cli(username, repository, file, password):
     """Encrypt requires as arguments a username, repository, and
     path to a .travis.yml file. Once the arguments are added, a password
