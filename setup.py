@@ -10,7 +10,7 @@ setup(name='travis-client',
       install_requires=[
         'click==6.6',
         'cryptography==1.5',
-        'pyyaml==3.12',
+        'PyYAML==3.12',
         'requests==2.9.1'
       ],
       entry_points='''
