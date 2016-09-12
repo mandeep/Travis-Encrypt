@@ -2,7 +2,7 @@
 Travis-Encrypt
 ##############
 
-|travis|
+|travis| |coverage| |dependencies|
 
 
 Travis-Encrypt is a Python command line application that provides a way to encrypt passwords
@@ -41,3 +41,7 @@ Travis-Encrypt will write the encrypted password to the given .travis.yml file.
 
 .. |travis| image:: https://travis-ci.org/mandeep/Travis-Client.svg?branch=master
     :target: https://travis-ci.org/mandeep/Travis-Client
+.. |coverage| image:: https://img.shields.io/coveralls/mandeep/Travis-Encrypt.svg
+    :target: https://coveralls.io/github/mandeep/Travis-Encrypt 
+.. |dependencies| image:: https://dependencyci.com/github/mandeep/Travis-Encrypt/badge
+    :target: https://dependencyci.com/github/mandeep/Travis-Encrypt
