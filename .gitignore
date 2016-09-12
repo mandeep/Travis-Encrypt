@@ -1,0 +1,8 @@
+travis_client.egg-info
+travis_encrypt.egg-info
+.coverage
+.cache
+travis/__pycache__/
+travis/tests/__pycache__/
+build/
+dist/
