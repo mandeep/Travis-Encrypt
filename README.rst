@@ -2,6 +2,9 @@
 Travis-Encrypt
 ##############
 
+|travis|
+
+
 Travis-Encrypt is a Python command line application that provides a way to encrypt passwords
 for use with Travis CI. This application intends to be a replacement for the Travis Ruby client
 as that client is not maintained and does not provide detail regarding password encryption.
@@ -35,3 +38,6 @@ With Travis-Encrypt installed, the command line application can be invoked with 
 
 The application will then issue a mandatory password prompt. Once the password is filled,
 Travis-Encrypt will write the encrypted password to the given .travis.yml file.
+
+.. |travis| image:: https://travis-ci.org/mandeep/Travis-Client.svg?branch=master
+    :target: https://travis-ci.org/mandeep/Travis-Client
