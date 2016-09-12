@@ -43,5 +43,5 @@ Travis-Encrypt will write the encrypted password to the given .travis.yml file.
     :target: https://travis-ci.org/mandeep/Travis-Client
 .. |coverage| image:: https://img.shields.io/coveralls/mandeep/Travis-Encrypt.svg
     :target: https://coveralls.io/github/mandeep/Travis-Encrypt 
-.. |dependencies| image:: https://dependencyci.com/github/mandeep/Travis-Encrypt/badge
+.. |dependencies| image:: https://img.shields.io/librariesio/github/mandeep/Travis-Client.svg
     :target: https://dependencyci.com/github/mandeep/Travis-Encrypt
