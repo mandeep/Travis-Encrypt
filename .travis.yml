@@ -1,20 +1,39 @@
+after_success:
+- coveralls
+deploy:
+  password:
+    secure: !!binary |
+      S3Z3YjI5R1BIMzYvUE5URmJETVQwdDhmY1duTkxza1hLTllFZ21XZVNxL2o0RnZOWHkyZTdqczlG
+      c2Y5T0ppN0Z6L2w2WWRmTmRycGd1ZDZBdGpWL1NMQlJMMytjN2pOZVpJUFRWZWtDU1U3dnZ2ZDlG
+      L3M0Zlg1Njd6Y2ZIYmw4Sk9RNXhFTW10RXgvcnpkN20vLy80TTRIR1IvMnpwTWU0blNwaWhtaG1v
+      eXpnSzJZdDJ2Y1ZsbUZLUjZZc0UrY1NhSVJQUm1zVW9lcy92bVJsd2dKVUlsMy85S2wxTjZYRnlp
+      Ym1lR2lSU2g3djRVV28wK0VTWXBmTVJSdzNsdXBySkdJKzNjQ0ZhNk15SFFqTENId1BQaTlEalRH
+      RERkYjM1ZjFsVzd6dGZHZktGZHBvUGx4ZzBuMjRVVG5aQU5yVkl2d1FkMU00aC8yMlVMaUpnbG9E
+      ak5JV0l4a1BkQnptK1ZaYjc1a3gwa3pBS1k5bWdYWTJYRTNpMklHZTV3TkdyWkR5ckVNdnBBekU0
+      ZDUwb3YyWGx0bHM3bGlnSUVoYW9DNWRQYlZqWjVOSDZjZWhISmptZHNVV3hVRGttblNOTjZYMlFZ
+      b2FVVlpSZmtUVDAvZHBGMGdJS0gvU1ZsOFh5VHhaOHBWbGhjZ2czR0tReGgzMTBVb2l0dDdWc3lD
+      YWpoMzIvV05teEd6eUhGMGZ2VFQxT0ppeEtRWlYwNlR6WlA3UFdzNzgwVWYvM0tFdExPNHpaSzFq
+      TXVUWkRuZ2JFVTV3MkZ5czNkUzZ1NDZGWndxUjFEMDJlblMzR1NlRGNObVBaSTdkZkUxbEJCYVdl
+      Y3prUGZUekNIMVZydSt2NGFYaTN0YndsODdkZlVsSmpCOUdoN1p0aExrSXpVTG0wampJQWtFQUU9
+  provider: pypi
+  user: mandeepb
+  true:
+    branch: master
+dist: trusty
+install:
+- pip install cryptography
+- pip install coveralls
+- python setup.py install
+- pip install coverage
+- pip install pytest
+- pip install pytest-cov
 language: python
 notifications:
   email: false
 python:
-  - "3.3"
-  - "3.4"
-  - "3.5"
+- '3.3'
+- '3.4'
+- '3.5'
 script:
-  - py.test -s -v -x --cov=.
+- py.test -s -v -x --cov=.
 sudo: required
-dist: trusty
-install:
-  - pip install cryptography
-  - pip install coveralls
-  - python setup.py install
-  - pip install coverage
-  - pip install pytest
-  - pip install pytest-cov
-after_success:
-  - coveralls
