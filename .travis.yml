@@ -2,15 +2,12 @@ language: python
 notifications:
   email: false
 python:
-  - 2.7_with_system_site_packages
   - 3.4_with_system_site_packages
 script:
   - py.test -s -v -x --cov=.
 sudo: required
 dist: trusty
 install:
-  - sudo apt-get update
-  - sudo apt-get install build-essential libssl-dev libffi-dev python-dev
   - pip install cryptography
   - pip install coveralls
   - python setup.py install
