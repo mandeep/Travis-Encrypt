@@ -2,7 +2,7 @@
 Travis-Encrypt
 ##############
 
-|travis| |coverage| |dependencies| |codacy|
+|travis| |coverage| |dependencies| |codacy| |version| |status| |pyversions| |format| |license|
 
 
 Travis-Encrypt is a Python command line application that provides a way to encrypt passwords
@@ -14,11 +14,15 @@ Installation
 *************
 
 
-To install Travis-Encrypt, run the following commands in a terminal::
+To install Travis-Encrypt simply run the following command in a terminal window::
 
-    git clone https://github.com/mandeep/Travis-Encrypt.git
-    cd Travis-Encrypt
-    pip install .
+    $ pip install travis-encrypt
+
+If you would rather install from source, run the following commands in a terminal window::
+
+    $ git clone https://github.com/mandeep/Travis-Encrypt.git
+    $ cd Travis-Encrypt
+    $ python setup.py install
 
 Travis-Encrypt will attempt to install the cryptography package, however the package requires
 headers for Python. If installation fails, please see the cryptography installation guide:
@@ -47,3 +51,13 @@ Travis-Encrypt will write the encrypted password to the given .travis.yml file.
     :target: https://dependencyci.com/github/mandeep/Travis-Encrypt
 .. |codacy| image:: https://img.shields.io/codacy/grade/16d519300c4d4524a38b385f6a7a2275.svg
     :target: https://www.codacy.com/app/bhutanimandeep/Travis-Encrypt/dashboard
+.. |version| image:: https://img.shields.io/pypi/v/travis-encrypt.svg
+    :target: https://pypi.python.org/pypi/travis-encrypt
+.. |status| image:: https://img.shields.io/pypi/status/travis-encrypt.svg
+    :target: https://pypi.python.org/pypi/travis-encrypt
+.. |pyversions| image:: https://img.shields.io/pypi/pyversions/travis-encrypt.svg
+    :target: https://pypi.python.org/pypi/travis-encrypt
+.. |format| image:: https://img.shields.io/pypi/format/travis-encrypt.svg
+    :target: https://pypi.python.org/pypi/travis-encrypt
+.. |license| image:: https://img.shields.io/pypi/l/travis-encrypt.svg
+    :target: https://pypi.python.org/pypi/travis-encrypt
