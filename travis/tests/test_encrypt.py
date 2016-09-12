@@ -5,6 +5,7 @@ from travis.encrypt import cli, encrypt_key, retrieve_public_key
 
 @pytest.fixture
 def repository():
+    """Function that can be passed as arguments to the unit tests."""
     return 'mandeep/Mosaic'
 
 
