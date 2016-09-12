@@ -48,10 +48,10 @@ def encrypt_key(key, password):
 @click.argument('file', type=click.Path(exists=True))
 @click.password_option()
 def cli(username, repository, file, password):
-    """Encrypt requires as arguments the username, repository, and
-    path to the .travis.yml file. Once the arguments are added, a password
-    prompt will ask for a password and with another prompt to confirm it. The password
-    will then be encrypted via the PKCS1v15 padding scheme, and added to the
+    """Encrypt requires as arguments a username, repository, and
+    path to a .travis.yml file. Once the arguments are added, a password
+    prompt will ask for a password and another prompt will ask to confirm it. The
+    password will then be encrypted via the PKCS1v15 padding scheme, and added to the
     .travis.yml file that was passed as an argument.
     """
     key = retrieve_public_key('{}/{}' .format(username, repository))
