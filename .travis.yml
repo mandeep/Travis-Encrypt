@@ -17,6 +17,7 @@ deploy:
       Y3prUGZUekNIMVZydSt2NGFYaTN0YndsODdkZlVsSmpCOUdoN1p0aExrSXpVTG0wampJQWtFQUU9
   provider: pypi
   user: mandeepb
+  distributions: "sdist bdist_wheel"
   true:
     branch: master
 dist: trusty
