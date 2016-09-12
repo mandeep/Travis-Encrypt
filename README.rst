@@ -27,7 +27,7 @@ Usage
 
 With Travis-Encrypt installed, the command line application can be invoked with the following command and mandatory arguments::
 
-    travis-encrypt GITHUB_USERNAME REPOSITORY PATH/TO/.TRAVIS.YML
+    travis-encrypt GITHUB_USERNAME REPOSITORY PATH
 
     Example:
 
