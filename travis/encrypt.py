@@ -60,9 +60,9 @@ def cli(username, repository, file, password):
     with open(file) as conffile:
         config = yaml.load(conffile)
 
-    config['deploy']['password'] = dict(secure=encrypted_password)
+    config['deploy']['password'] = {'secure': encrypted_password}
 
     with open(file, 'w') as conffile:
         yaml.dump(config, conffile, default_flow_style=False)
 
-    print('Password added to .travis.yml')
+    print('Password added to {}' .format(file))
