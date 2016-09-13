@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='travis-encrypt',
-      version='0.1.1',
+      version='0.2.0',
       author='Mandeep Bhutani',
       author_email='info@mandeep.xyz',
       description='A command line application that encrypts passwords for use with Travis CI.',
@@ -18,7 +18,7 @@ setup(name='travis-encrypt',
         travis-encrypt=travis.encrypt:cli
         ''',
       classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
