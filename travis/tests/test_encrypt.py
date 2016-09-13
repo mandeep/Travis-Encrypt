@@ -26,11 +26,26 @@ def test_encrypt_key(repository):
     assert isinstance(encrypted_password, bytes)
 
 
-def test_cli():
-    """Tests encrypt's cli function."""
+def test_empty_file():
+    """Tests encrypt's cli function with a barebones yaml file."""
     runner = CliRunner()
     with runner.isolated_filesystem():
         initial_data = {'language': 'python'}
+        with open('file.yml', 'w') as file:
+            yaml.dump(initial_data, file, default_flow_style=True)
+
+        result = runner.invoke(cli, ['mandeep', 'Travis-Encrypt', 'file.yml'],
+                               'SUPER_SECURE_PASSWORD')
+        assert not result.exception
+
+
+def test_non_empty_file():
+    """Tests encrypt's cli function with a yaml file that includes information
+    that needs to be overwritten."""
+    runner = CliRunner()
+    with runner.isolated_filesystem():
+        initial_data = {'language': 'python', 'dist': 'trusty',
+                        'deploy': {'password': {'secure': 'SUPER_SECURE_PASSWORD'}}}
         with open('file.yml', 'w') as file:
             yaml.dump(initial_data, file, default_flow_style=True)
 
