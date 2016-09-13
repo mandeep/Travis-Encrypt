@@ -6,7 +6,7 @@ from travis.encrypt import cli, encrypt_key, retrieve_public_key
 @pytest.fixture
 def repository():
     """Function that can be passed as arguments to the unit tests."""
-    return 'mandeep/Mosaic'
+    return 'mandeep/Travis-Encrypt'
 
 
 def test_public_key_retrieval(repository):
@@ -30,7 +30,8 @@ def test_cli():
     runner = CliRunner()
     with runner.isolated_filesystem():
         with open('file.yml', 'w') as file:
-            file.write('password')
+            file.write('Test')
 
-        result = runner.invoke(cli, ['mandeep', 'Mosaic', 'file.yml'], input='password')
+        result = runner.invoke(cli, ['mandeep', 'Travis-Encrypt', 'file.yml'],
+                               'SUPER_SECURE_PASSWORD')
         assert 'Password' in result.output
