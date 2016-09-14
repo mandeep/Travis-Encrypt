@@ -7,7 +7,7 @@ import requests
 import yaml
 
 
-def retrieve_public_key(user_repo):
+def retrieve_public_key(user_repo: str) -> str:
     """Retrieves the public key from the Travis API and returns it as JSON.
 
     Argument:
@@ -18,7 +18,7 @@ def retrieve_public_key(user_repo):
     return response.json()['key']
 
 
-def encrypt_key(key, password):
+def encrypt_key(key: str, password: str) -> bytes:
     """Loads the public key and returns it as an RSAPublicKey object. Then encrypts the
     given password with the encrypt() method of RSAPublicKey.
 
