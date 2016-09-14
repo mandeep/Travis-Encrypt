@@ -29,6 +29,7 @@ def encrypt_key(key: str, password: str) -> bytes:
     Travis CI uses the PKCS1v15 padding scheme. While PKCS1v15 is secure, it is
     outdated and should be replaced with OAEP.
 
+    Example:
     OAEP(mgf=MGF1(algorithm=SHA256()), algorithm=SHA256(), label=None))
     """
     public_key = load_pem_public_key(key.encode(), default_backend())
@@ -44,9 +45,8 @@ def encrypt_key(key: str, password: str) -> bytes:
 def cli(username, repository, file, password):
     """Encrypt requires as arguments a username, repository, and
     path to a .travis.yml file. Once the arguments are added, a password
-    prompt will ask for a password and another prompt will ask to confirm it. The
-    password will then be encrypted via the PKCS1v15 padding scheme, and added to the
-    .travis.yml file that was passed as an argument.
+    prompt will ask for a password. The password will then be encrypted via the
+    PKCS1v15 padding scheme, and added to the .travis.yml file that was passed as an argument.
     """
     key = retrieve_public_key('{}/{}' .format(username, repository))
     encrypted_password = encrypt_key(key, password.encode())
