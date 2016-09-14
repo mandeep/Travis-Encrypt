@@ -19,8 +19,9 @@ def retrieve_public_key(user_repo: str) -> str:
 
 
 def encrypt_key(key: str, password: str) -> bytes:
-    """Loads the public key as an RSAPublicKey object. Then encrypts the
-    given password with the encrypt() method of RSAPublicKey.
+    """Encodes the public key as a UTF-8 bytes object and loads it as an RSAPublicKey
+    object using Cryptography's default backend. Then encrypts the given password
+    with the encrypt() method of RSAPublicKey and the PKCS1v15 padding scheme.
 
     Arguments:
     key -- public key that requires deserialization
