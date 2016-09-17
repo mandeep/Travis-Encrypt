@@ -1,6 +1,4 @@
-##############
-Travis-Encrypt
-##############
+.. image:: travis/images/header.png
 
 |travis| |coverage| |dependencies| |codacy| |version| |status| |pyversions| |format| |license|
 
