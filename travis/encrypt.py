@@ -39,11 +39,11 @@ def encrypt_key(key: str, password: str) -> bytes:
 
 
 @click.command()
-@click.argument('username', help='Enter your GitHub username.')
-@click.argument('repository', help='Enter the name of your repository.')
+@click.argument('username')
+@click.argument('repository')
 @click.argument('file', type=click.Path(exists=True))
 @click.option('--password', prompt=True, hide_input=True, confirmation_prompt=False)
-@click.option('--env', is_flag=True, help='Encrypt an environment variable.')
+@click.option('--env', is_flag=True)
 def cli(username, repository, file, password, env):
     """Encrypt requires as arguments a username, repository, and
     path to a .travis.yml file. Once the arguments are added, a password
