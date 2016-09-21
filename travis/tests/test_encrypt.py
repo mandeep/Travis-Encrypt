@@ -26,8 +26,8 @@ def test_encrypt_key(repository):
     assert isinstance(encrypted_password, bytes)
 
 
-def test_empty_file():
-    """Tests encrypt's cli function with a barebones yaml file."""
+def test_password_empty_file():
+    """Tests encrypt's cli function with an empty yaml file."""
     runner = CliRunner()
     with runner.isolated_filesystem():
         initial_data = {'language': 'python'}
@@ -39,16 +39,44 @@ def test_empty_file():
         assert not result.exception
 
 
-def test_non_empty_file():
+def test_password_non_empty_file():
     """Tests encrypt's cli function with a yaml file that includes information
     that needs to be overwritten."""
     runner = CliRunner()
     with runner.isolated_filesystem():
         initial_data = {'language': 'python', 'dist': 'trusty',
-                        'deploy': {'password': {'secure': 'SUPER_SECURE_PASSWORD'}}}
+                        'deploy': {'password': {'secure': 'SUPER_INSECURE_PASSWORD'}}}
         with open('file.yml', 'w') as file:
             yaml.dump(initial_data, file, default_flow_style=True)
 
         result = runner.invoke(cli, ['mandeep', 'Travis-Encrypt', 'file.yml'],
                                'SUPER_SECURE_PASSWORD')
+        assert not result.exception
+
+
+def test_environment_variable_empty_file():
+    """Tests encrypt's cli function with the --env flag and with an empty yaml file."""
+    runner = CliRunner()
+    with runner.isolated_filesystem():
+        initial_data = {'language': 'python'}
+        with open('file.yml', 'w') as file:
+            yaml.dump(initial_data, file, default_flow_style=True)
+
+        result = runner.invoke(cli, ['--env', 'mandeep', 'Travis-Encrypt', 'file.yml'],
+                               'API_KEY=SUPER_SECURE_KEY')
+        assert not result.exception
+
+
+def test_environment_variable_non_empty_file():
+    """Tests encrypt's cli function with the --env flag and with a yaml file
+    that includes information that needs to be overwritten."""
+    runner = CliRunner()
+    with runner.isolated_filesystem():
+        initial_data = {'language': 'python', 'dist': 'trusty',
+                        'env': {'global': {'secure': 'API_KEY=SUPER_INSECURE_KEY'}}}
+        with open('file.yml', 'w') as file:
+            yaml.dump(initial_data, file, default_flow_style=True)
+
+        result = runner.invoke(cli, ['mandeep', 'Travis-Encrypt', 'file.yml'],
+                               'SUPER_SECURE_API_KEY')
         assert not result.exception
