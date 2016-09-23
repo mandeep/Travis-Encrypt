@@ -34,7 +34,7 @@ Usage
 
 With Travis Encrypt installed, the command line application can be invoked with the following command and mandatory arguments::
 
-    usage: travis-encrypt [OPTIONS] github_username repository path
+    usage: travis-encrypt [options] github_username repository path
 
     positional arguments:
         github_username         GitHub username that houses the repository
