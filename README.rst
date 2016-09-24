@@ -43,6 +43,7 @@ With Travis Encrypt installed, the command line application can be invoked with 
 
     optional arguments:
         --help                  Show the help message and quit
+        --deploy                Encrypt a password for continuous deployment usage
         --env                   Encrypt an environment variable
 
 When the command is entered, the application will issue a prompt where the user can enter
@@ -53,6 +54,11 @@ environment variable to the given .travis.yml file.
 Example of password encryption::
 
     $  travis-encrypt mandeep Travis-Encrypt /home/user/.travis.yml
+    Password:
+
+Example of deployment password encryption::
+
+    $  travis-encrypt --deploy mandeep Travis-Encrypt /home/user/.travis.yml
     Password:
 
 Example of environment variable encryption::
