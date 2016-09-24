@@ -43,8 +43,9 @@ def encrypt_key(key: str, password: str) -> bytes:
 @click.argument('repository')
 @click.argument('file', type=click.Path(exists=True))
 @click.option('--password', prompt=True, hide_input=True, confirmation_prompt=False)
+@click.option('--deploy', is_flag=True)
 @click.option('--env', is_flag=True)
-def cli(username, repository, file, password, env):
+def cli(username, repository, file, password, deploy, env):
     """Encrypt requires as arguments a username, repository, and
     path to a .travis.yml file. Once the arguments are added, a password
     prompt will ask for a password. The password will then be encrypted via the
@@ -56,10 +57,12 @@ def cli(username, repository, file, password, env):
     with open(file) as conffile:
         config = yaml.load(conffile)
 
-    if not env:
+    if deploy:
         config.setdefault('deploy', {}).setdefault('password', {})['secure'] = encrypted_password
-    else:
+    elif env:
         config.setdefault('env', {}).setdefault('global', {})['secure'] = encrypted_password
+    else:
+        config.setdefault('password', {})['secure'] = encrypted_password
 
     with open(file, 'w') as conffile:
         yaml.dump(config, conffile, default_flow_style=False)
