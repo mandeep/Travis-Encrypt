@@ -45,11 +45,39 @@ def test_password_non_empty_file():
     runner = CliRunner()
     with runner.isolated_filesystem():
         initial_data = {'language': 'python', 'dist': 'trusty',
-                        'deploy': {'password': {'secure': 'SUPER_INSECURE_PASSWORD'}}}
+                        'password': {'secure': 'SUPER_INSECURE_PASSWORD'}}
         with open('file.yml', 'w') as file:
             yaml.dump(initial_data, file, default_flow_style=True)
 
         result = runner.invoke(cli, ['mandeep', 'Travis-Encrypt', 'file.yml'],
+                               'SUPER_SECURE_PASSWORD')
+        assert not result.exception
+
+
+def test_deploy_empty_file():
+    """Tests encrypt's cli function with an empty yaml file."""
+    runner = CliRunner()
+    with runner.isolated_filesystem():
+        initial_data = {'language': 'python'}
+        with open('file.yml', 'w') as file:
+            yaml.dump(initial_data, file, default_flow_style=True)
+
+        result = runner.invoke(cli, ['--deploy', 'mandeep', 'Travis-Encrypt', 'file.yml'],
+                               'SUPER_SECURE_PASSWORD')
+        assert not result.exception
+
+
+def test_deploy_non_empty_file():
+    """Tests encrypt's cli function with a yaml file that includes information
+    that needs to be overwritten."""
+    runner = CliRunner()
+    with runner.isolated_filesystem():
+        initial_data = {'language': 'python', 'dist': 'trusty',
+                        'deploy': {'password': {'secure': 'SUPER_INSECURE_PASSWORD'}}}
+        with open('file.yml', 'w') as file:
+            yaml.dump(initial_data, file, default_flow_style=True)
+
+        result = runner.invoke(cli, ['--deploy', 'mandeep', 'Travis-Encrypt', 'file.yml'],
                                'SUPER_SECURE_PASSWORD')
         assert not result.exception
 
