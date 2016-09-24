@@ -45,12 +45,12 @@ With Travis Encrypt installed, the command line application can be invoked with 
         --help                  Show the help message and quit
         --env                   Encrypt an environment variable
 
-    Example of password encryption:
+Example of password encryption::
 
     $  travis-encrypt mandeep Travis-Encrypt /home/user/.travis.yml
     Password:
 
-    Example of environment variable encryption:
+Example of environment variable encryption::
 
     $  travis-encrypt --env mandeep Travis-Encrypt /home/user/.travis.yml
     Password:
