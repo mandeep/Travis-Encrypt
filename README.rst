@@ -53,10 +53,10 @@ With Travis Encrypt installed, the command line application can be invoked with 
 
     $  travis-encrypt --env mandeep Travis-Encrypt /home/user/.travis.yml
 
-The application will then issue a prompt where the user can enter either a password
-or environment variable. In both cases, the prompt will print 'Password:'. Once the
-prompt is answered, Travis Encrypt will write the encrypted password or environment variable
-to the given .travis.yml file.
+When the command is entered, the application will issue a prompt where the user can enter
+either a password or environment variable. In both cases, the prompt will print 'Password:'.
+Once the prompt is answered, Travis Encrypt will write the encrypted password or
+environment variable to the given .travis.yml file.
 
 .. |travis| image:: https://travis-ci.org/mandeep/Travis-Encrypt.svg?branch=master
     :target: https://travis-ci.org/mandeep/Travis-Encrypt
