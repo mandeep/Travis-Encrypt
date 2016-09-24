@@ -48,10 +48,12 @@ With Travis Encrypt installed, the command line application can be invoked with 
     Example of password encryption:
 
     $  travis-encrypt mandeep Travis-Encrypt /home/user/.travis.yml
+    Password:
 
     Example of environment variable encryption:
 
     $  travis-encrypt --env mandeep Travis-Encrypt /home/user/.travis.yml
+    Password:
 
 When the command is entered, the application will issue a prompt where the user can enter
 either a password or environment variable. In both cases, the prompt will print 'Password:'.
