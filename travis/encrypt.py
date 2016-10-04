@@ -7,8 +7,8 @@ import requests
 import yaml
 
 
-def retrieve_public_key(user_repo: str) -> str:
-    """Retrieves the public key from the Travis API and returns it as JSON.
+def retrieve_public_key(user_repo):
+    """Retrieve the public key from the Travis API and return it as JSON.
 
     Argument:
     user_repo --  the repository in the format of 'username/repository'
@@ -18,16 +18,17 @@ def retrieve_public_key(user_repo: str) -> str:
     return response.json()['key']
 
 
-def encrypt_key(key: str, password: str) -> bytes:
-    """Encodes the public key as a UTF-8 bytes object and loads it as an RSAPublicKey
-    object using Cryptography's default backend. Then encrypts the given password
-    with the encrypt() method of RSAPublicKey and the PKCS1v15 padding scheme.
+def encrypt_key(key, password):
+    """Encode the public key as a UTF-8 bytes object.
 
     Arguments:
     key -- public key that requires deserialization
     password -- password to be encrypted
 
-    Travis CI uses the PKCS1v15 padding scheme. While PKCS1v15 is secure, it is
+    The public key retrieved from Travis is loaded as an RSAPublicKey
+    object using Cryptography's default backend. Then the given password
+    is encrypted with the encrypt() method of RSAPublicKey. Travis CI uses
+    the PKCS1v15 padding scheme. While PKCS1v15 is secure, it is
     outdated and should be replaced with OAEP.
 
     Example:
@@ -46,7 +47,9 @@ def encrypt_key(key: str, password: str) -> bytes:
 @click.option('--deploy', is_flag=True)
 @click.option('--env', is_flag=True)
 def cli(username, repository, file, password, deploy, env):
-    """Encrypt requires as arguments a username, repository, and
+    """Encrypt passwords and environment variables for use with Travis CI.
+
+    Travis Encrypt requires as arguments a username, repository, and
     path to a .travis.yml file. Once the arguments are added, a password
     prompt will ask for a password. The password will then be encrypted via the
     PKCS1v15 padding scheme, and added to the .travis.yml file that was passed as an argument.
