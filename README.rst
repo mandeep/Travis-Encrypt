@@ -70,7 +70,7 @@ Example of environment variable encryption::
     :target: https://travis-ci.org/mandeep/Travis-Encrypt
 .. |coverage| image:: https://img.shields.io/coveralls/mandeep/Travis-Encrypt.svg
     :target: https://coveralls.io/github/mandeep/Travis-Encrypt 
-.. |dependencies| image:: https://img.shields.io/librariesio/github/mandeep/Travis-Client.svg
+.. |dependencies| image:: https://dependencyci.com/github/mandeep/Travis-Encrypt/badge
     :target: https://dependencyci.com/github/mandeep/Travis-Encrypt
 .. |codacy| image:: https://img.shields.io/codacy/grade/16d519300c4d4524a38b385f6a7a2275.svg
     :target: https://www.codacy.com/app/bhutanimandeep/Travis-Encrypt/dashboard
