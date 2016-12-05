@@ -6,3 +6,4 @@ travis/__pycache__/
 travis/tests/__pycache__/
 build/
 dist/
+travis/images/header.svg
