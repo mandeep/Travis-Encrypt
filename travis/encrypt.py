@@ -9,7 +9,7 @@ import yaml
 
 
 def retrieve_public_key(user_repo):
-    """Retrieve the public key from the Travis API and return it as JSON.
+    """Retrieve the public key from the Travis API.
 
     Argument:
     user_repo --  the repository in the format of 'username/repository'
