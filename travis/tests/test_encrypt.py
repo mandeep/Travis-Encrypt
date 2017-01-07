@@ -6,12 +6,12 @@ import yaml
 
 @pytest.fixture
 def repository():
-    """Function that can be passed as arguments to the unit tests."""
+    """Link to the Travis Encrypt repository."""
     return 'mandeep/Travis-Encrypt'
 
 
 def test_public_key_retrieval(repository):
-    """Tests encrypt's retrieve_public_key function."""
+    """Test the encrypt module's retrieve_public_key function."""
     public_key = retrieve_public_key(repository)
     assert isinstance(public_key, str)
     assert 'BEGIN PUBLIC KEY' in public_key
@@ -19,7 +19,7 @@ def test_public_key_retrieval(repository):
 
 
 def test_encrypt_key(repository):
-    """Tests encrypt's encrypt_key function."""
+    """Test the encrypt module's encrypt_key function."""
     public_key = retrieve_public_key(repository)
     password = 'SUPER_SECURE_PASSWORD'
     encrypted_password = encrypt_key(public_key, password.encode())
@@ -27,7 +27,7 @@ def test_encrypt_key(repository):
 
 
 def test_password_empty_file():
-    """Tests encrypt's cli function with an empty yaml file."""
+    """Test the encrypt module's CLI function with an empty YAML file."""
     runner = CliRunner()
     with runner.isolated_filesystem():
         initial_data = {'language': 'python'}
@@ -39,9 +39,10 @@ def test_password_empty_file():
         assert not result.exception
 
 
-def test_password_non_empty_file():
-    """Tests encrypt's cli function with a yaml file that includes information
-    that needs to be overwritten."""
+def test_password_nonempty_file():
+    """Test the encrypt module's CLI function with a nonempty YAML file.
+
+    The YAML file includes information that needs to be overwritten."""
     runner = CliRunner()
     with runner.isolated_filesystem():
         initial_data = {'language': 'python', 'dist': 'trusty',
@@ -55,7 +56,7 @@ def test_password_non_empty_file():
 
 
 def test_deploy_empty_file():
-    """Tests encrypt's cli function with an empty yaml file."""
+    """Test the encrypt module's CLI function with the --deploy flag and an empty YAML file."""
     runner = CliRunner()
     with runner.isolated_filesystem():
         initial_data = {'language': 'python'}
@@ -67,9 +68,10 @@ def test_deploy_empty_file():
         assert not result.exception
 
 
-def test_deploy_non_empty_file():
-    """Tests encrypt's cli function with a yaml file that includes information
-    that needs to be overwritten."""
+def test_deploy_nonempty_file():
+    """Test the encrypt module's CLI function with the --deploy flag and a nonempty YAML file.
+
+    The YAML file includes information that needs to be overwritten."""
     runner = CliRunner()
     with runner.isolated_filesystem():
         initial_data = {'language': 'python', 'dist': 'trusty',
@@ -83,7 +85,7 @@ def test_deploy_non_empty_file():
 
 
 def test_environment_variable_empty_file():
-    """Tests encrypt's cli function with the --env flag and with an empty yaml file."""
+    """Test the encrypt module's CLI function with the --env flag and an empty YAML file."""
     runner = CliRunner()
     with runner.isolated_filesystem():
         initial_data = {'language': 'python'}
@@ -95,9 +97,10 @@ def test_environment_variable_empty_file():
         assert not result.exception
 
 
-def test_environment_variable_non_empty_file():
-    """Tests encrypt's cli function with the --env flag and with a yaml file
-    that includes information that needs to be overwritten."""
+def test_environment_variable_nonempty_file():
+    """Test the encrypt module's CLI function with the --env flag and a nonempty YAML file.
+
+    The YAML file includes information that needs to be overwritten."""
     runner = CliRunner()
     with runner.isolated_filesystem():
         initial_data = {'language': 'python', 'dist': 'trusty',
