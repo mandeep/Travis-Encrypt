@@ -25,16 +25,16 @@ If you would rather install from source, run the following commands in a termina
     $  python setup.py install
 
 Travis Encrypt will attempt to install the cryptography package, however the package requires
-headers for Python. If installation fails, please see the cryptography installation guide:
-https://cryptography.io/en/latest/installation/
+development packages for C and Python. If installation fails, please see the cryptography
+installation guide: https://cryptography.io/en/latest/installation/
 
 ******
 Usage
 ******
 
-With Travis Encrypt installed, the command line application can be invoked with the following command and mandatory arguments::
+With Travis Encrypt installed, the command line application can be invoked with the following command and arguments::
 
-    usage: travis-encrypt [options] github_username repository path
+    usage: travis-encrypt [options] github_username repository [path]
 
     positional arguments:
         github_username         GitHub username that houses the repository
@@ -48,23 +48,28 @@ With Travis Encrypt installed, the command line application can be invoked with 
 
 When the command is entered, the application will issue a prompt where the user can enter
 either a password or environment variable. In both cases, the prompt will print 'Password:'.
-Once the prompt is answered, Travis Encrypt will write the encrypted password or
-environment variable to the given .travis.yml file.
+Once the prompt is answered, Travis Encrypt will print the encrypted password to standard
+output. If a path to .travis.yml is provided the encrypted password will be written to
+.travis.yml instead of printing to standard output.
 
 Example of password encryption::
 
-    $  travis-encrypt mandeep Travis-Encrypt /home/user/.travis.yml
+    $  travis-encrypt mandeep Travis-Encrypt
     Password:
+    Please add the following password to .travis.yml:
+        secure: ...
 
 Example of deployment password encryption::
 
     $  travis-encrypt --deploy mandeep Travis-Encrypt /home/user/.travis.yml
     Password:
+    Encrypted password added to /home/user/.travis.yml
 
 Example of environment variable encryption::
 
     $  travis-encrypt --env mandeep Travis-Encrypt /home/user/.travis.yml
     Password:
+    Encrypted password added to /home/user/.travis.yml
 
 .. |travis| image:: https://travis-ci.org/mandeep/Travis-Encrypt.svg?branch=master
     :target: https://travis-ci.org/mandeep/Travis-Encrypt

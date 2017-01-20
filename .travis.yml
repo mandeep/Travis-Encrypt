@@ -36,5 +36,5 @@ python:
 - '3.4'
 - '3.5'
 script:
-- py.test -s -v -x --cov=.
+- py.test -s -v --cov=.
 sudo: required
