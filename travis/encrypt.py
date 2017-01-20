@@ -43,11 +43,10 @@ def encrypt_key(key, password):
 @click.command()
 @click.argument('username')
 @click.argument('repository')
-@click.argument('file', type=click.Path(exists=True))
 @click.option('--password', prompt=True, hide_input=True, confirmation_prompt=False)
 @click.option('--deploy', is_flag=True)
 @click.option('--env', is_flag=True)
-def cli(username, repository, file, password, deploy, env):
+def cli(username, repository, password, deploy, env):
     """Encrypt passwords and environment variables for use with Travis CI.
 
     Travis Encrypt requires as arguments a username, repository, and
@@ -58,17 +57,5 @@ def cli(username, repository, file, password, deploy, env):
     key = retrieve_public_key('{}/{}' .format(username, repository))
     encrypted_password = encrypt_key(key, password.encode())
 
-    with open(file) as conffile:
-        config = yaml.load(conffile)
-
-    if deploy:
-        config.setdefault('deploy', {}).setdefault('password', {})['secure'] = encrypted_password
-    elif env:
-        config.setdefault('env', {}).setdefault('global', {})['secure'] = encrypted_password
-    else:
-        config.setdefault('password', {})['secure'] = encrypted_password
-
-    with open(file, 'w') as conffile:
-        yaml.dump(config, conffile, default_flow_style=False)
-
-    print('Encrypted password added to {}' .format(file))
+    print("Please add the following password to your .travis.yml file: \n  secure: {}"
+          .format(base64.b64encode(encrypted_password).decode('ascii')))
