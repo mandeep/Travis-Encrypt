@@ -3,23 +3,11 @@ after_success:
 deploy:
   true:
     branch: master
-  password:
-    secure: !!binary |
-      aFdGREYyRWVXTm1lVDhIeDZSZnVqNGk0VXpuT3NwMFRrVTVaMU9nR2tCaE16a3RjN1g2UWwwamRw
-      YUNmZldlZVY0T09wWmQyYm1oZzBHNmJma3psNjlreU9peFczVSttOUlCdHZTNlJKY0g3aVFlK05X
-      anN2Yjd0cjE5b24vd3EyU1l5Z0lVbURGVW4xQU91Mm1ESUlrTndtNFY2bWN0SXczTmE3QWdYcjRo
-      d2I3UUhJZFdtN2I2S2N5NVdMSzhQaVBEL2pxVHVvclp2NmlQRngrUDZrcHc0Vkw2b0piK0FRK1lr
-      NnpGMHgraUtaSVJsNW5XMysyS0NWV3Jxc1dObTFyajNVWWM1NE45YkpudTFpQ0plUitZeU9tcWs3
-      cGhZaDVoNCtzemk3NmwyT3RISmJXY1U1T0dEMnBiS1VONjlPdjBSTmNQd0kxaERPQzdNVmczZ0J4
-      ejBsY0hjRk9yYS85VmpyRTZETWpLd1NKUTA0SG5LeFhMblBJWHZqd3AwV01tUGRCYmFhbjE2WmF1
-      dmwrTmd1UkdZd1VPWHNDUHJGYTZiMG1wTnJTZmszYkNTYWR2ODVrREwyMzdtM1Z2ay94NVZScE81
-      RmVEeVd0R3VTVzZnT1ZtWER1Z0s1MldVQkx3ZHRaYXBKQ1pLeGNHTmFFZlVCL3p2aDQ1NHJTb0Fl
-      a3hjKzlkNEMxMEFQNkc3b1h2VnJKMmdrcGorUzFnamJBekVJdi93Rld0bnI5MUFqVm1UbHZTcU9C
-      Q1EwYS9oaklEU3NLZTlVSU53aFlMdytmVGN3SUpUVnZFR1hHTUtjRk9Td0orNm5jVnNPcE4yZVNq
-      dVJhWE5sQ1R5Y3Y5NWthKzVpU0JYK2NUKzVVV3c2UTlQYTVzVy8ydy8xb25GWk1KcVFvbU5uOUU9
-  provider: pypi
   distributions: sdist bdist_wheel
   user: mandeepb
+  provider: pypi
+  password:
+    secure: "oxTYla2fHNRRjD0akv1eCpMbwpUILDTpn4iFnoaDi9z/CrFO2+AQKf4/WTQPPMfKYpYLzdaXBXV0r0amKIUm5fOGM4Pip3T4enTBAiBqjL8ykRsLaFpKuGGupHEy6OOPH6UQm4XxewbYCsGdRDWm6MX0VhNc5Wm0tuNZE/Ex1A4idstZpFse599AfL9Xsc6L9sUiaMnbcoZD8XcTnbOfXiE2BXPzCzjT40EGoa+NSEpvJKVsdfgLv/ihIvxsuwrH7/ns5wN0D2zIUmDo7EGWVO3GNVMmrAJ9Oz96kzCmY0GpnnEA3HPYdVIpzD0i49rEzVmPcXFbtLMsa+zyIonjH3LORS+tDoMPOCgX9fbG9CfxN1UOZGF/whte/f2VUyUKS4E7092/qFj5AY1Bl/2vgu+tDIyTu0iXHBlfShkka3exuSsRaG+GSgGV5NvdZ2C/QSgbwhYQCLKDu5q//JVDt+WX89m1flth06OECuC69Q9gMc/4AJO8jK++lhRIKB2gGODL5EFOIN0tAqwoP+r9gm8Qy0DaLbkYiD0y4g/HanwLQYn0FZ9Dv/TSRfIhVnx0NKbWedDnTWFnx/ClGHG1YWwZOk7xhNu2bPNFs6taycPhD+zYUBra+Hcco5qp0BLayYzhbEPfKVdw/KRmsyn19aD5LPhjW2wEFXM+701kAOg="
 dist: trusty
 install:
 - pip install cryptography

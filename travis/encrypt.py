@@ -37,7 +37,7 @@ def encrypt_key(key, password):
     """
     public_key = load_pem_public_key(key.encode(), default_backend())
     encrypted_password = public_key.encrypt(password, PKCS1v15())
-    return base64.b64encode(encrypted_password)
+    return base64.b64encode(encrypted_password).decode('ascii')
 
 
 @click.command()
@@ -78,5 +78,5 @@ def cli(username, repository, file, password, deploy, env):
         print('Encrypted password added to {}' .format(file))
 
     else:
-        print("Please add the following password to .travis.yml:\n\nsecure: !!binary |\n{}\n"
-              .format(base64.b64encode(encrypted_password).decode('ascii')))
+        print('Please add the following password to .travis.yml:\n\nsecure: "{}"\n'
+              .format(encrypted_password))
