@@ -1,7 +1,8 @@
 from click.testing import CliRunner
 import pytest
-from travis.encrypt import cli, encrypt_key, retrieve_public_key
 import yaml
+
+from travis.encrypt import cli, encrypt_key, retrieve_public_key
 
 
 @pytest.fixture
@@ -24,6 +25,14 @@ def test_encrypt_key(repository):
     password = 'SUPER_SECURE_PASSWORD'
     encrypted_password = encrypt_key(public_key, password.encode())
     assert isinstance(encrypted_password, bytes)
+
+
+def test_password_output():
+    """Test the encrypt module's CLI function standard output printing."""
+    runner = CliRunner()
+    result = runner.invoke(cli, ['mandeep', 'Travis-Encrypt'],
+                           'SUPER_SECURE_PASSWORD')
+    assert not result.exception
 
 
 def test_password_empty_file():
