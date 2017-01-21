@@ -24,7 +24,7 @@ def test_encrypt_key(repository):
     public_key = retrieve_public_key(repository)
     password = 'SUPER_SECURE_PASSWORD'
     encrypted_password = encrypt_key(public_key, password.encode())
-    assert isinstance(encrypted_password, bytes)
+    assert isinstance(encrypted_password, str)
 
 
 def test_password_output():
