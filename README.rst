@@ -57,7 +57,7 @@ Example of password encryption::
     $  travis-encrypt mandeep Travis-Encrypt
     Password:
     Please add the following password to .travis.yml:
-        secure: ...
+        secure: !!binary | ...
 
 Example of deployment password encryption::
 
