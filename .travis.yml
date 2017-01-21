@@ -4,6 +4,7 @@ deploy:
   true:
     branch: master
   password:
+<<<<<<< HEAD
     secure: !!binary |   
       RVhrTTNJK1VqQVhJQytCVndIOXBZalNnTU5aV25jNHpJT3V3aE93cytVcUZwcklIOEVaZy9Ia3ZS
       ZVU1UEEyc0hiM2FhTndOOFlDTDdtT1BGR3RrbHY2WTQ1UUpDS3RqM1lxSDU1ZXVRRjVrSnMzWU81
@@ -17,6 +18,21 @@ deploy:
       SXQxbEVaZjRFVWV3VE94ei94b1Bac2VNN3A5d0RZOUNNdWFXb1ZYZWhrOU1qYUxWM0t4c1ZIS1hL
       N1dsQU8vN3hYTU1mckZyZGt0aXcvOTdQT3lVOC9YclhXQ2dLNUFlU2JCWXF5NmZNcDhjQ1dXUVVT
       eVVwTy9OUGk4UGQyOHdsa1hLMHd6MEl6UmY2VWJBek1TaEl5TlB4MHllUGdxTGZUSElNb0Q5OFU9
+=======
+    secure: !!binary |
+      aFdGREYyRWVXTm1lVDhIeDZSZnVqNGk0VXpuT3NwMFRrVTVaMU9nR2tCaE16a3RjN1g2UWwwamRw
+      YUNmZldlZVY0T09wWmQyYm1oZzBHNmJma3psNjlreU9peFczVSttOUlCdHZTNlJKY0g3aVFlK05X
+      anN2Yjd0cjE5b24vd3EyU1l5Z0lVbURGVW4xQU91Mm1ESUlrTndtNFY2bWN0SXczTmE3QWdYcjRo
+      d2I3UUhJZFdtN2I2S2N5NVdMSzhQaVBEL2pxVHVvclp2NmlQRngrUDZrcHc0Vkw2b0piK0FRK1lr
+      NnpGMHgraUtaSVJsNW5XMysyS0NWV3Jxc1dObTFyajNVWWM1NE45YkpudTFpQ0plUitZeU9tcWs3
+      cGhZaDVoNCtzemk3NmwyT3RISmJXY1U1T0dEMnBiS1VONjlPdjBSTmNQd0kxaERPQzdNVmczZ0J4
+      ejBsY0hjRk9yYS85VmpyRTZETWpLd1NKUTA0SG5LeFhMblBJWHZqd3AwV01tUGRCYmFhbjE2WmF1
+      dmwrTmd1UkdZd1VPWHNDUHJGYTZiMG1wTnJTZmszYkNTYWR2ODVrREwyMzdtM1Z2ay94NVZScE81
+      RmVEeVd0R3VTVzZnT1ZtWER1Z0s1MldVQkx3ZHRaYXBKQ1pLeGNHTmFFZlVCL3p2aDQ1NHJTb0Fl
+      a3hjKzlkNEMxMEFQNkc3b1h2VnJKMmdrcGorUzFnamJBekVJdi93Rld0bnI5MUFqVm1UbHZTcU9C
+      Q1EwYS9oaklEU3NLZTlVSU53aFlMdytmVGN3SUpUVnZFR1hHTUtjRk9Td0orNm5jVnNPcE4yZVNq
+      dVJhWE5sQ1R5Y3Y5NWthKzVpU0JYK2NUKzVVV3c2UTlQYTVzVy8ydy8xb25GWk1KcVFvbU5uOUU9
+>>>>>>> 0.4.0
   provider: pypi
   distributions: sdist bdist_wheel
   user: mandeepb
@@ -36,5 +52,5 @@ python:
 - '3.4'
 - '3.5'
 script:
-- py.test -s -v -x --cov=.
+- py.test -s -v --cov=.
 sudo: required
