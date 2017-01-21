@@ -20,7 +20,7 @@ def retrieve_public_key(user_repo):
 
 
 def encrypt_key(key, password):
-    """Encode the public key as a UTF-8 bytes object.
+    """Encrypt the password with the public key and return an ASCII representation.
 
     Arguments:
     key -- public key that requires deserialization
@@ -28,7 +28,9 @@ def encrypt_key(key, password):
 
     The public key retrieved from Travis is loaded as an RSAPublicKey
     object using Cryptography's default backend. Then the given password
-    is encrypted with the encrypt() method of RSAPublicKey. Travis CI uses
+    is encrypted with the encrypt() method of RSAPublicKey. The encrypted
+    password is then encoded to base64 and decoded into ASCII in order to
+    convert the bytes object into a string object. Travis CI uses
     the PKCS1v15 padding scheme. While PKCS1v15 is secure, it is
     outdated and should be replaced with OAEP.
 
@@ -78,5 +80,5 @@ def cli(username, repository, file, password, deploy, env):
         print('Encrypted password added to {}' .format(file))
 
     else:
-        print('Please add the following password to .travis.yml:\n\nsecure: "{}"\n'
+        print('Please add the following password to your .travis.yml:\n\nsecure: "{}"\n'
               .format(encrypted_password))
