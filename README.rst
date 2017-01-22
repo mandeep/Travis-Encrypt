@@ -1,17 +1,14 @@
-.. image:: travis/images/header.png
+.. image:: header.png
 
 |travis| |coverage| |dependencies| |codacy| |version| |status| |pyversions| |format| |license|
 
 
 Travis Encrypt is a Python command line application that provides an easy way to encrypt passwords
-and environment variables for use with Travis CI. This application intends to be a replacement for the Travis Ruby client as that client is not maintained and does not provide detail regarding password encryption.
+and environment variables for use with Travis CI. All passwords and environment variables are encrypted with the PKCS1v15 padding scheme as it's the only padding supported by Travis CI.
 
-All passwords and environment variables are encrypted with the PKCS1v15 padding scheme until
-Travis-CI updates its protocols.
-
-*************
+************
 Installation
-*************
+************
 
 
 To install Travis Encrypt simply run the following command in a terminal window::
@@ -28,9 +25,9 @@ Travis Encrypt will attempt to install the cryptography package, however the pac
 development packages for C and Python. If installation fails, please see the cryptography
 installation guide: https://cryptography.io/en/latest/installation/
 
-******
+*****
 Usage
-******
+*****
 
 With Travis Encrypt installed, the command line application can be invoked with the following command and arguments::
 
@@ -56,7 +53,7 @@ Example of password encryption::
 
     $  travis-encrypt mandeep Travis-Encrypt
     Password:
-    Please add the following password to your .travis.yml:
+    Please add the following to your .travis.yml:
     
     secure: "oxTYla2fHNRRjD0akv1e..."
 

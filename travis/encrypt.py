@@ -53,10 +53,11 @@ def encrypt_key(key, password):
 def cli(username, repository, file, password, deploy, env):
     """Encrypt passwords and environment variables for use with Travis CI.
 
-    Travis Encrypt requires as arguments a username, repository, and
-    path to a .travis.yml file. Once the arguments are added, a password
-    prompt will ask for a password. The password will then be encrypted via the
-    PKCS1v15 padding scheme, and added to the .travis.yml file that was passed as an argument.
+    Travis Encrypt requires as arguments the user's GitHub username and repository name.
+    Once the arguments are passed, a password prompt will ask for the password that needs
+    to be encrypted. The given password will then be encrypted via the PKCS1v15 padding
+    scheme and printed to standard output. If the path to a .travis.yml file
+    was given as an argument, the encrypted password is added to the .travis.yml file.
     """
     key = retrieve_public_key('{}/{}' .format(username, repository))
     encrypted_password = encrypt_key(key, password.encode())
