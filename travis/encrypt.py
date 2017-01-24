@@ -45,25 +45,24 @@ def encrypt_key(key, password):
 @click.command()
 @click.argument('username')
 @click.argument('repository')
-@click.argument('file', type=click.Path(exists=True), required=False)
-@click.option('--password', prompt=True, hide_input=True,
-              confirmation_prompt=False, help="The password to be encrypted.")
+@click.argument('path', type=click.Path(exists=True), required=False)
+@click.option('--password', prompt=True, hide_input=True, confirmation_prompt=False, help="The password to be encrypted.")
 @click.option('--deploy', is_flag=True, help="Write to .travis.yml for deployment.")
 @click.option('--env', is_flag=True, help="Write to .travis.yml for environment variable use.")
-def cli(username, repository, file, password, deploy, env):
+def cli(username, repository, path, password, deploy, env):
     """Encrypt passwords and environment variables for use with Travis CI.
 
     Travis Encrypt requires as arguments the user's GitHub username and repository name.
     Once the arguments are passed, a password prompt will ask for the password that needs
     to be encrypted. The given password will then be encrypted via the PKCS1v15 padding
     scheme and printed to standard output. If the path to a .travis.yml file
-    was given as an argument, the encrypted password is added to the .travis.yml file.
+    is given as an argument, the encrypted password is added to the .travis.yml file.
     """
     key = retrieve_public_key('{}/{}' .format(username, repository))
     encrypted_password = encrypt_key(key, password.encode())
 
-    if file:
-        with open(file) as conffile:
+    if path:
+        with open(path) as conffile:
             config = yaml.load(conffile)
 
         if deploy:
@@ -75,10 +74,10 @@ def cli(username, repository, file, password, deploy, env):
         else:
             config.setdefault('password', {})['secure'] = encrypted_password
 
-        with open(file, 'w') as conffile:
+        with open(path, 'w') as conffile:
             yaml.dump(config, conffile, default_flow_style=False)
 
-        print('Encrypted password added to {}' .format(file))
+        print('Encrypted password added to {}' .format(path))
 
     else:
         print('Please add the following password to your .travis.yml:\n\nsecure: "{}"\n'
