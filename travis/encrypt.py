@@ -64,7 +64,6 @@ def cli(username, repository, path, password, deploy, env):
     is given as an argument, the encrypted password is added to the .travis.yml file.
     """
     key = retrieve_public_key('{}/{}' .format(username, repository))
-    print(key)
     encrypted_password = encrypt_key(key, password.encode())
 
     if path:
