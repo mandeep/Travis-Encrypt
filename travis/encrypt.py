@@ -13,10 +13,15 @@ def retrieve_public_key(user_repo):
 
     Argument:
     user_repo --  the repository in the format of 'username/repository'
+
+    The public key is returned as JSON in order to passed to cryptography's
+    load_pem_public_key function. Due to issues with some public keys being
+    returned from the Travis API as PKCS8 encoded, the key is returned with
+    RSA removed from the header and footer.
     """
     url = 'https://api.travis-ci.org/repos/{}/key' .format(user_repo)
     response = requests.get(url)
-    return response.json()['key']
+    return response.json()['key'].replace(' RSA ', ' ')
 
 
 def encrypt_key(key, password):
@@ -59,6 +64,7 @@ def cli(username, repository, path, password, deploy, env):
     is given as an argument, the encrypted password is added to the .travis.yml file.
     """
     key = retrieve_public_key('{}/{}' .format(username, repository))
+    print(key)
     encrypted_password = encrypt_key(key, password.encode())
 
     if path:
