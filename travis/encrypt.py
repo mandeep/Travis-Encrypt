@@ -8,6 +8,10 @@ import requests
 import yaml
 
 
+class InvalidCredentialsError(Exception):
+    """Error raised when a username or repository does not exist."""
+
+
 def retrieve_public_key(user_repo):
     """Retrieve the public key from the Travis API.
 
@@ -21,7 +25,11 @@ def retrieve_public_key(user_repo):
     """
     url = 'https://api.travis-ci.org/repos/{}/key' .format(user_repo)
     response = requests.get(url)
-    return response.json()['key'].replace(' RSA ', ' ')
+
+    try:
+        return response.json()['key'].replace(' RSA ', ' ')
+    except KeyError:
+        raise InvalidCredentialsError("Please enter a valid user/repository name.")
 
 
 def encrypt_key(key, password):
