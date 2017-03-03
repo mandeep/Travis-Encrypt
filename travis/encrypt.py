@@ -85,5 +85,5 @@ def cli(username, repository, path, password, deploy, env):
         print('Encrypted password added to {}' .format(path))
 
     else:
-        print('Please add the following to your .travis.yml:\n\nsecure: "{}"\n'
+        print('\nPlease add the following to your .travis.yml:\n\nsecure: "{}"\n'
               .format(encrypted_password))
