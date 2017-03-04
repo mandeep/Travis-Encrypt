@@ -19,6 +19,12 @@ def test_public_key_retrieval(repository):
     assert 'END PUBLIC KEY' in public_key
 
 
+def test_invalid_credentials():
+    """Test that an InvalidCredentialsError is raised."""
+    with pytest.raises(Exception) as e:
+        retrieve_public_key("INVALID_USER_NAME/INVALID_REPO")
+    
+
 def test_encrypt_key(repository):
     """Test the encrypt module's encrypt_key function."""
     public_key = retrieve_public_key(repository)
