@@ -2,7 +2,7 @@ from click.testing import CliRunner
 import pytest
 import yaml
 
-from travis.encrypt import cli, encrypt_key, retrieve_public_key
+from travis.encrypt import cli, encrypt_key, InvalidCredentialsError, retrieve_public_key
 
 
 @pytest.fixture
@@ -21,9 +21,9 @@ def test_public_key_retrieval(repository):
 
 def test_invalid_credentials():
     """Test that an InvalidCredentialsError is raised."""
-    with pytest.raises(Exception) as e:
+    with pytest.raises(InvalidCredentialsError):
         retrieve_public_key("INVALID_USER_NAME/INVALID_REPO")
-    
+
 
 def test_encrypt_key(repository):
     """Test the encrypt module's encrypt_key function."""
