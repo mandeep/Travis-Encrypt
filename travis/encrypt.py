@@ -76,7 +76,7 @@ def cli(username, repository, path, password, deploy, env):
 
     if path:
         with open(path) as conffile:
-            config = yaml.load(conffile)
+            config = yaml.safe_load(conffile)
 
         if deploy:
             config.setdefault('deploy', {}).setdefault('password', {})['secure'] = encrypted_password
@@ -88,7 +88,7 @@ def cli(username, repository, path, password, deploy, env):
             config.setdefault('password', {})['secure'] = encrypted_password
 
         with open(path, 'w') as conffile:
-            yaml.dump(config, conffile, default_flow_style=False)
+            yaml.safe_dump(config, conffile, default_flow_style=False)
 
         print('Encrypted password added to {}' .format(path))
 
