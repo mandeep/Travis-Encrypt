@@ -4,6 +4,14 @@ Change Log
 
 All notable changes to this project will be documented in this file.
 
+0.5.2 - 2017-03-20
+==================
+
+Changed
+-------
+
+-  yaml.load and yaml.dump changed to yaml.safe_load and yaml.safe_dump
+
 0.5.1 - 2017-03-04
 ==================
 
