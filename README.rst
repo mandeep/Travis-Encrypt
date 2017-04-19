@@ -55,7 +55,7 @@ Example of password encryption::
     Password:
     Please add the following to your .travis.yml:
     
-    secure: "oxTYla2fHNRRjD0akv1e..."
+    secure: "oxTYla2fHNRRjD0akv1e..." (edited for brevity)
 
 Example of deployment password encryption::
 

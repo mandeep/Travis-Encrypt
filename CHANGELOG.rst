@@ -4,6 +4,14 @@ Change Log
 
 All notable changes to this project will be documented in this file.
 
+0.5.3 - 2017-04-19
+==================
+
+Changed
+-------
+
+-  Added comment in README to show that password example was edited for brevity
+
 0.5.2 - 2017-03-20
 ==================
 
