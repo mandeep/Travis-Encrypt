@@ -4,6 +4,19 @@ Change Log
 
 All notable changes to this project will be documented in this file.
 
+0.5.4 - 2017-05-22
+==================
+
+Added
+-------
+
+-  Python 3.6 now tested in CI
+
+Changed
+-------
+
+-   Coverage report omits tests directory 
+
 0.5.3 - 2017-04-19
 ==================
 
