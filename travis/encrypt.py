@@ -1,3 +1,9 @@
+"""Encrypt passwords and environment variables for use with Travis CI.
+
+Available functions:
+retrieve_public_key -- retrieve the public key from the Travis CI API.
+encrypt_key -- load the public key and encrypt it with PKCSv15
+"""
 import base64
 
 import click
@@ -18,7 +24,7 @@ def retrieve_public_key(user_repo):
     Argument:
     user_repo --  the repository in the format of 'username/repository'
 
-    The public key is returned as JSON in order to passed to cryptography's
+    The public key is returned as cJSON in order to passed to cryptography's
     load_pem_public_key function. Due to issues with some public keys being
     returned from the Travis API as PKCS8 encoded, the key is returned with
     RSA removed from the header and footer.

@@ -4,11 +4,24 @@ Change Log
 
 All notable changes to this project will be documented in this file.
 
+0.5.5 - 2017-05-23
+==================
+
+Added
+-----
+
+-  Module docstring in encrypt.py
+
+Fixed
+-----
+
+-  Fixed typo in __main__.py for commandline entrypoint
+
 0.5.4 - 2017-05-22
 ==================
 
 Added
--------
+-----
 
 -  Python 3.6 now tested in CI
 
