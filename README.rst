@@ -75,7 +75,7 @@ Example of environment variable encryption::
     :target: https://coveralls.io/github/mandeep/Travis-Encrypt 
 .. |dependencies| image:: https://dependencyci.com/github/mandeep/Travis-Encrypt/badge
     :target: https://dependencyci.com/github/mandeep/Travis-Encrypt
-.. |scrutinizer| image::.. image:: https://img.shields.io/scrutinizer/g/mandeep/Travis-Encrypt.svg
+.. |scrutinizer| image:: https://img.shields.io/scrutinizer/g/mandeep/Travis-Encrypt.svg
     :target: https://scrutinizer-ci.com/g/mandeep/Travis-Encrypt/?branch=master
 .. |version| image:: https://img.shields.io/pypi/v/travis-encrypt.svg
     :target: https://pypi.python.org/pypi/travis-encrypt
