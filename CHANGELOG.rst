@@ -4,6 +4,14 @@ Change Log
 
 All notable changes to this project will be documented in this file.
 
+0.5.6 - 2017-06-01
+==================
+
+Changed
+-------
+
+-  Replaced Codacy with Scrutinizer CI
+
 0.5.5 - 2017-05-23
 ==================
 
