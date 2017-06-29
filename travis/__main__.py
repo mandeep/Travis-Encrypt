@@ -3,6 +3,6 @@
 Example: python -m travis
 """
 
-from travis.encrypt import cli
+from travis.cli import cli
 
 cli()
