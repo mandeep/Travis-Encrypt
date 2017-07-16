@@ -1,17 +1,17 @@
 from setuptools import setup
 
 setup(name='travis-encrypt',
-      version='0.6.0',
+      version='0.7.0',
       author='Mandeep',
       author_email='info@mandeep.xyz',
       description='A command line application that encrypts passwords for use with Travis CI.',
       license='GPLv3+',
       packages=['travis', 'travis.tests'],
       install_requires=[
-        'click==6.6',
-        'cryptography==1.7.1',
-        'PyYAML==3.12',
-        'requests==2.12.5'
+        'click>=6.7',
+        'cryptography>=1.9',
+        'PyYAML>=3.12',
+        'requests>=2.18.1'
       ],
       entry_points='''
         [console_scripts]
