@@ -4,6 +4,14 @@ Change Log
 
 All notable changes to this project will be documented in this file.
 
+0.7.1 - 2017-07-16
+==================
+
+Fixed
+-----
+
+-  Omit new tests directory from coverage report
+
 0.7.0 - 2017-07-16
 ==================
 

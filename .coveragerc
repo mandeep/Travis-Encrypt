@@ -2,5 +2,5 @@
 omit = 
     setup.py
     travis/__main__.py
-    travis/tests/*
+    tests/*
     */__init__.py
