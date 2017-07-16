@@ -1,5 +1,12 @@
-after_success:
-- coveralls
+notifications:
+  email: false
+dist: trusty
+sudo: required
+language: python
+python:
+- '3.4'
+- '3.5'
+- '3.6'
 deploy:
   true:
     branch: master
@@ -7,8 +14,7 @@ deploy:
   user: mandeepb
   provider: pypi
   password:
-    secure: "oxTYla2fHNRRjD0akv1eCpMbwpUILDTpn4iFnoaDi9z/CrFO2+AQKf4/WTQPPMfKYpYLzdaXBXV0r0amKIUm5fOGM4Pip3T4enTBAiBqjL8ykRsLaFpKuGGupHEy6OOPH6UQm4XxewbYCsGdRDWm6MX0VhNc5Wm0tuNZE/Ex1A4idstZpFse599AfL9Xsc6L9sUiaMnbcoZD8XcTnbOfXiE2BXPzCzjT40EGoa+NSEpvJKVsdfgLv/ihIvxsuwrH7/ns5wN0D2zIUmDo7EGWVO3GNVMmrAJ9Oz96kzCmY0GpnnEA3HPYdVIpzD0i49rEzVmPcXFbtLMsa+zyIonjH3LORS+tDoMPOCgX9fbG9CfxN1UOZGF/whte/f2VUyUKS4E7092/qFj5AY1Bl/2vgu+tDIyTu0iXHBlfShkka3exuSsRaG+GSgGV5NvdZ2C/QSgbwhYQCLKDu5q//JVDt+WX89m1flth06OECuC69Q9gMc/4AJO8jK++lhRIKB2gGODL5EFOIN0tAqwoP+r9gm8Qy0DaLbkYiD0y4g/HanwLQYn0FZ9Dv/TSRfIhVnx0NKbWedDnTWFnx/ClGHG1YWwZOk7xhNu2bPNFs6taycPhD+zYUBra+Hcco5qp0BLayYzhbEPfKVdw/KRmsyn19aD5LPhjW2wEFXM+701kAOg="
-dist: trusty
+    secure: qqawdrJXlyPcnPiB08h5GFVZrnw46fTwk9n7EDYxoY9fLHTsc0QxkaLRVhMyuT6SxUw97uncOlGHCwbgAWFa7OYhUMUwA3+YqeKOfsSlSmwKR7CRDlqZzmk7kMhzbdSutNGQ7/M8zplQAfQIAdeT3kBdkiuFlfvO5NcfdSAZf/nGOSIsFEPUUMGn9p1l04BAGw4wqnqu9NVnI7eXVaAIHedlzD31gSv5DgXAUMP7TYZ/SFim3dz7QxD5PqJ6ylfPCgw9mNVqB5orbwaDBK49ZNT7ZuPv3Lmr6MsK3s8PzVMP9QTlfhOC3obOb1jsBWWBG/ZwQg2necAQFVOTxWPdijQl5lm7yKN3Af+bf8oVKXJre/KzAwtK8yV9Z0H8EHxeyU7ZXJQH613BnjXkxct+bANETN0X/fA0sHO082kv1t/syeQIqAyq2l2gd262/YiFwYQkBhN+6ZQq8fDll517VpS+JW+JqjqycVKeM2w/w7iWrurI0ruXltvaZDoFI/PeOPVFZyrcdF1gkNx8xn09uOYlpuuIZfGIWzQnszmu43YycTEAW30sGmAPd4tpXHtF1UbfKAec7HUgcCqQ3Q/QUDEKauZ69E++M7UHSj6ZJ/pjBIzlMfVZgPHuxNJcqW/ocQMwppdh3oKMuoxXvX3hFAFG8clloQbftDxnbR2giuE=
 install:
 - pip install cryptography
 - pip install coveralls
@@ -16,13 +22,7 @@ install:
 - pip install coverage
 - pip install pytest
 - pip install pytest-cov
-language: python
-notifications:
-  email: false
-python:
-- '3.4'
-- '3.5'
-- '3.6'
 script:
-- py.test -s -v --cov=.
-sudo: required
+- py.test -v --cov=.
+after_success:
+- coveralls

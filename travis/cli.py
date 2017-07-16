@@ -5,9 +5,10 @@ It imports functions found in Travis Encrypt's module in order to
 create the CLI.
 """
 import click
-import yaml
 
 from travis.encrypt import retrieve_public_key, encrypt_key
+from travis.orderer import ordered_load, ordered_dump
+
 
 @click.command()
 @click.argument('username')
@@ -30,7 +31,7 @@ def cli(username, repository, path, password, deploy, env):
 
     if path:
         with open(path) as conffile:
-            config = yaml.safe_load(conffile)
+            config = ordered_load(conffile)
 
         if deploy:
             config.setdefault('deploy', {}).setdefault('password', {})['secure'] = encrypted_password
@@ -42,10 +43,9 @@ def cli(username, repository, path, password, deploy, env):
             config.setdefault('password', {})['secure'] = encrypted_password
 
         with open(path, 'w') as conffile:
-            yaml.safe_dump(config, conffile, default_flow_style=False)
+            ordered_dump(config, conffile, default_flow_style=False)
 
         print('Encrypted password added to {}' .format(path))
 
     else:
-        print('\nPlease add the following to your .travis.yml:\n\nsecure: "{}"\n'
-              .format(encrypted_password))
+        print('\nPlease add the following to your .travis.yml:\n\nsecure: "{}"\n' .format(encrypted_password))
