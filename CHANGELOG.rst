@@ -4,6 +4,23 @@ Change Log
 
 All notable changes to this project will be documented in this file.
 
+0.7.0 - 2017-07-16
+==================
+
+Added
+-----
+
+-  Ordering is preserved when editing .travis.yml files
+
+0.6.0 - 2017-06-28
+==================
+
+Added
+-----
+
+-  Separated CLI and encryption functions into separate files
+-  Finalizing encrypt.py as API and gearing towards 1.0.0 release
+
 0.5.6 - 2017-06-01
 ==================
 
