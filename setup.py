@@ -3,7 +3,7 @@ from setuptools import setup
 setup(name='travis-encrypt',
       version='0.7.0',
       author='Mandeep',
-      author_email='info@mandeep.xyz',
+      author_email='mandeep@keemail.me',
       description='A command line application that encrypts passwords for use with Travis CI.',
       license='GPLv3+',
       packages=['travis'],
