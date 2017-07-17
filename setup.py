@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='travis-encrypt',
-      version='0.7.1',
+      version='0.7.2',
       author='Mandeep',
       author_email='mandeep@keemail.me',
       description='A command line application that encrypts passwords for use with Travis CI.',
@@ -24,4 +24,5 @@ setup(name='travis-encrypt',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
       ],
+      data_files = [("", ["LICENSE"])]
       )
