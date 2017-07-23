@@ -3,7 +3,6 @@
 The orderer module contains functions necessary to load and dump
 yaml configurations as OrderedDicts as a way to preserve ordering.
 
-
 Source: https://stackoverflow.com/questions/5121931/
 """
 from collections import OrderedDict
