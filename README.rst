@@ -49,7 +49,7 @@ Once the prompt is answered, Travis Encrypt will print the encrypted password to
 output. If a path to .travis.yml is provided the encrypted password will be written to
 .travis.yml instead of printing to standard output.
 
-Example of password encryption::
+Example of password encryption (the password is hidden when entering)::
 
     $  travis-encrypt mandeep Travis-Encrypt
     Password:
@@ -63,7 +63,7 @@ Example of deployment password encryption::
     Password:
     Encrypted password added to /home/user/.travis.yml
 
-Example of environment variable encryption::
+Example of encrypting the environment variable API_TOKEN="abc123"::
 
     $  travis-encrypt --env mandeep Travis-Encrypt /home/user/.travis.yml
     Password:
