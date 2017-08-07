@@ -4,6 +4,15 @@ Change Log
 
 All notable changes to this project will be documented in this file.
 
+
+0.7.5 - 2017-08-06
+==================
+
+Fixed
+-----
+
+-  Removed extra whitespace from functions in encrypt.py doctrings
+
 0.7.4 - 2017-08-06
 ==================
 
