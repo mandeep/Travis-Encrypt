@@ -35,6 +35,10 @@ def retrieve_public_key(user_repo):
     response: str
         the public RSA key of the username's repository
 
+    Raises
+    ------
+    InvalidCredentialsError
+        raised when an invalid 'username/repository' is given
     """
     url = 'https://api.travis-ci.org/repos/{}/key' .format(user_repo)
     response = requests.get(url)
@@ -73,9 +77,6 @@ def encrypt_key(key, password):
 
     Example:
     OAEP(mgf=MGF1(algorithm=SHA256()), algorithm=SHA256(), label=None))
-
-
-
     """
     public_key = load_pem_public_key(key.encode(), default_backend())
     encrypted_password = public_key.encrypt(password, PKCS1v15())
