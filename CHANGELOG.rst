@@ -4,12 +4,24 @@ Change Log
 
 All notable changes to this project will be documented in this file.
 
+0.7.4 - 2017-08-06
+==================
+
+Added
+-----
+
+-  Example in README.rst of encrypting an environment variable
+
+Changed
+-------
+
+-  Refactored encrypt.py docstrings using numpy guidelines
 
 0.7.3 - 2017-07-23
 ==================
 
 Changed
------
+-------
 
 -  Output password to stdout without enclosing doubles quotes
 
