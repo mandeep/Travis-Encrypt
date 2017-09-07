@@ -5,6 +5,15 @@ Change Log
 All notable changes to this project will be documented in this file.
 
 
+0.8.0 - 2017-09-07
+==================
+
+Added
+-----
+
+-  Functions to load and dump configurations with ordering preserved
+   were added to encrypt.py for API usage
+
 0.7.5 - 2017-08-06
 ==================
 

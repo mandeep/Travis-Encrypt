@@ -11,6 +11,8 @@ from cryptography.hazmat.primitives.asymmetric.padding import PKCS1v15
 from cryptography.hazmat.primitives.serialization import load_pem_public_key
 import requests
 
+from travis.orderer import ordered_load, ordered_dump
+
 
 class InvalidCredentialsError(Exception):
     """Error raised when a username or repository does not exist."""
@@ -81,3 +83,47 @@ def encrypt_key(key, password):
     public_key = load_pem_public_key(key.encode(), default_backend())
     encrypted_password = public_key.encrypt(password, PKCS1v15())
     return base64.b64encode(encrypted_password).decode('ascii')
+
+
+def load_travis_configuration(path):
+    """Load the travis configuration settings from the travis.yml file.
+
+    The configuration settings from the travis.yml file will be loaded
+    with ordering preserved.
+
+    Parameters
+    ----------
+    path: str
+        The file path to the .travis.yml file
+
+    Returns
+    -------
+    config: collections.OrderedDict
+        The configuration settings in an OrderedDict object
+    """
+    with open(path) as config_file:
+        config = ordered_load(config_file)
+
+    return config
+
+
+def dump_travis_configuration(config, path):
+    """Dump the travis configuration settings to the travis.yml file.
+
+    The configuration settings from the travis.yml will be dumped with
+    ordering preserved. Thus, when a password is added to the travis.yml
+    file, a diff will show that only the password was added.
+
+    Parameters
+    ----------
+    config: collections.OrderedDict
+        The configuration settings to dump into the travis.yml file
+    path: str
+        The file path to the .travis.yml file
+
+    Returns
+    -------
+    None
+    """
+    with open(path, 'w') as config_file:
+            ordered_dump(config, config_file, default_flow_style=False)

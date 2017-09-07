@@ -6,8 +6,8 @@ create the CLI.
 """
 import click
 
-from travis.encrypt import retrieve_public_key, encrypt_key
-from travis.orderer import ordered_load, ordered_dump
+from travis.encrypt import (retrieve_public_key, encrypt_key,
+                            load_travis_configuration, dump_travis_configuration)
 
 
 @click.command()
@@ -30,8 +30,7 @@ def cli(username, repository, path, password, deploy, env):
     encrypted_password = encrypt_key(key, password.encode())
 
     if path:
-        with open(path) as conffile:
-            config = ordered_load(conffile)
+        config = load_travis_configuration(path)
 
         if deploy:
             config.setdefault('deploy', {}).setdefault('password', {})['secure'] = encrypted_password
@@ -42,8 +41,7 @@ def cli(username, repository, path, password, deploy, env):
         else:
             config.setdefault('password', {})['secure'] = encrypted_password
 
-        with open(path, 'w') as conffile:
-            ordered_dump(config, conffile, default_flow_style=False)
+        dump_travis_configuration(config, path)
 
         print('Encrypted password added to {}' .format(path))
 
