@@ -1,6 +1,6 @@
 .. image:: header.png
 
-|travis| |coverage| |dependencies| |scrutinizer| |version| |status| |pyversions| |format| |license|
+|travis| |coverage| |dependencies| |scrutinizer| |version| |implementation| |status| |pyversions| |format| |license|
 
 
 Travis Encrypt is a Python command line application that provides an easy way to encrypt passwords
@@ -78,6 +78,8 @@ Example of encrypting the environment variable API_TOKEN="abc123"::
 .. |scrutinizer| image:: https://img.shields.io/scrutinizer/g/mandeep/Travis-Encrypt.svg
     :target: https://scrutinizer-ci.com/g/mandeep/Travis-Encrypt/?branch=master
 .. |version| image:: https://img.shields.io/pypi/v/travis-encrypt.svg
+    :target: https://pypi.python.org/pypi/travis-encrypt
+.. |implementation| image:: https://img.shields.io/pypi/implementation/travis-encrypt.svg
     :target: https://pypi.python.org/pypi/travis-encrypt
 .. |status| image:: https://img.shields.io/pypi/status/travis-encrypt.svg
     :target: https://pypi.python.org/pypi/travis-encrypt
