@@ -1,10 +1,15 @@
 from setuptools import setup
 
+with open('README.rst') as file_object:
+    description = file_object.read()
+
 setup(name='travis-encrypt',
-      version='0.8.0',
+      version='0.9.0',
       author='Mandeep',
       author_email='mandeep@keemail.me',
-      description='A command line application that encrypts passwords for use with Travis CI.',
+      url='https://github.com/mandeep/Travis-Encrypt',
+      long_description=description,
+      description='Encrypt passwords for use with Travis CI.',
       license='GPLv3+',
       packages=['travis'],
       install_requires=[
@@ -24,6 +29,8 @@ setup(name='travis-encrypt',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: Implementation :: CPython',
+        'Programming Language :: Python :: Implementation :: PyPy'
       ],
-      data_files = [("", ["LICENSE"])]
+      data_files=[("", ["LICENSE"])]
       )
