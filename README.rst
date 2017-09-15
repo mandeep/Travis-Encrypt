@@ -1,6 +1,6 @@
 .. image:: header.png
 
-|travis| |coverage| |dependencies| |scrutinizer| |version| |implementation| |status| |pyversions| |format| |license|
+|travis| |coverage| |dependencies| |scrutinizer| |format| |version| |license| |pyversions| |implementation| |status|
 
 
 Travis Encrypt is a Python command line application that provides an easy way to encrypt passwords
