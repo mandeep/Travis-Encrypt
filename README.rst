@@ -69,7 +69,7 @@ Example of encrypting the environment variable API_TOKEN="abc123"::
     Password:
     Encrypted password added to /home/user/.travis.yml
 
-.. |travis| image:: https://travis-ci.org/mandeep/Travis-Encrypt.svg?branch=master?style=flat-square
+.. |travis| image:: https://img.shields.io/travis/mandeep/Travis-Encrypt/master.svg?style=flat-square
     :target: https://travis-ci.org/mandeep/Travis-Encrypt
 .. |coverage| image:: https://img.shields.io/coveralls/mandeep/Travis-Encrypt.svg?style=flat-square
     :target: https://coveralls.io/github/mandeep/Travis-Encrypt 
