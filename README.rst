@@ -69,23 +69,23 @@ Example of encrypting the environment variable API_TOKEN="abc123"::
     Password:
     Encrypted password added to /home/user/.travis.yml
 
-.. |travis| image:: https://travis-ci.org/mandeep/Travis-Encrypt.svg?branch=master
+.. |travis| image:: https://travis-ci.org/mandeep/Travis-Encrypt.svg?branch=master?style=flat-square
     :target: https://travis-ci.org/mandeep/Travis-Encrypt
-.. |coverage| image:: https://img.shields.io/coveralls/mandeep/Travis-Encrypt.svg
+.. |coverage| image:: https://img.shields.io/coveralls/mandeep/Travis-Encrypt.svg?style=flat-square
     :target: https://coveralls.io/github/mandeep/Travis-Encrypt 
 .. |dependencies| image:: https://dependencyci.com/github/mandeep/Travis-Encrypt/badge
     :target: https://dependencyci.com/github/mandeep/Travis-Encrypt
-.. |scrutinizer| image:: https://img.shields.io/scrutinizer/g/mandeep/Travis-Encrypt.svg
+.. |scrutinizer| image:: https://img.shields.io/scrutinizer/g/mandeep/Travis-Encrypt.svg?style=flat-square
     :target: https://scrutinizer-ci.com/g/mandeep/Travis-Encrypt/?branch=master
-.. |version| image:: https://img.shields.io/pypi/v/travis-encrypt.svg
+.. |version| image:: https://img.shields.io/pypi/v/travis-encrypt.svg?style=flat-square
     :target: https://pypi.python.org/pypi/travis-encrypt
-.. |implementation| image:: https://img.shields.io/pypi/implementation/travis-encrypt.svg
+.. |implementation| image:: https://img.shields.io/pypi/implementation/travis-encrypt.svg?style=flat-square
     :target: https://pypi.python.org/pypi/travis-encrypt
-.. |status| image:: https://img.shields.io/pypi/status/travis-encrypt.svg
+.. |status| image:: https://img.shields.io/pypi/status/travis-encrypt.svg?style=flat-square
     :target: https://pypi.python.org/pypi/travis-encrypt
-.. |pyversions| image:: https://img.shields.io/pypi/pyversions/travis-encrypt.svg
+.. |pyversions| image:: https://img.shields.io/pypi/pyversions/travis-encrypt.svg?style=flat-square
     :target: https://pypi.python.org/pypi/travis-encrypt
-.. |format| image:: https://img.shields.io/pypi/format/travis-encrypt.svg
+.. |format| image:: https://img.shields.io/pypi/format/travis-encrypt.svg?style=flat-square
     :target: https://pypi.python.org/pypi/travis-encrypt
-.. |license| image:: https://img.shields.io/pypi/l/travis-encrypt.svg
+.. |license| image:: https://img.shields.io/pypi/l/travis-encrypt.svg?style=flat-square
     :target: https://pypi.python.org/pypi/travis-encrypt
