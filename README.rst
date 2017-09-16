@@ -73,7 +73,7 @@ Example of encrypting the environment variable API_TOKEN="abc123"::
     :target: https://travis-ci.org/mandeep/Travis-Encrypt
 .. |coverage| image:: https://img.shields.io/coveralls/mandeep/Travis-Encrypt.svg?style=flat-square
     :target: https://coveralls.io/github/mandeep/Travis-Encrypt 
-.. |dependencies| image:: https://dependencyci.com/github/mandeep/Travis-Encrypt/badge
+.. |dependencies| image:: https://img.shields.io/librariesio/github/mandeep/Travis-Encrypt.svg?style=flat-square
     :target: https://dependencyci.com/github/mandeep/Travis-Encrypt
 .. |scrutinizer| image:: https://img.shields.io/scrutinizer/g/mandeep/Travis-Encrypt.svg?style=flat-square
     :target: https://scrutinizer-ci.com/g/mandeep/Travis-Encrypt/?branch=master
