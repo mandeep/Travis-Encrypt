@@ -5,6 +5,15 @@ Changelog
 All notable changes to this project will be documented in this file.
 
 
+0.9.1 - 2018-01-27
+==================
+
+Fixed
+-----
+
+-  Fix adding secure environment variable to global keys with multiple items
+
+
 0.9.0 - 2017-09-08
 ==================
 
