@@ -36,7 +36,12 @@ def cli(username, repository, path, password, deploy, env):
             config.setdefault('deploy', {}).setdefault('password', {})['secure'] = encrypted_password
 
         elif env:
-            config.setdefault('env', {}).setdefault('global', {})['secure'] = encrypted_password
+            try:
+                config.setdefault('env', {}).setdefault('global', {})['secure'] = encrypted_password
+            except TypeError:
+                for item in config['env']['global']:
+                    if isinstance(item, dict) and 'secure' in item:
+                        item['secure'] = encrypted_password
 
         else:
             config.setdefault('password', {})['secure'] = encrypted_password

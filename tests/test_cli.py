@@ -169,3 +169,35 @@ def test_environment_variable_nonempty_file():
         assert config['dist'] == 'trusty'
         assert base64.b64decode(config['env']['global']['secure'])
         assert ['language', 'dist', 'env'] == [key for key in config.keys()]
+
+
+def test_environment_variable_multiple_global_items():
+    """Test the encrypt module's CLI function with the --env flag and a nonempty YAML file.
+
+    The YAML file's global key is a list of items. The global key needs to be
+    traversed and the secure key if found needs to be overwritten."""
+    runner = CliRunner()
+    with runner.isolated_filesystem():
+
+        initial_data = OrderedDict([('language', 'python'), ('dist', 'trusty'),
+                                    ('env', {'global': ['SOMETHING', 'OR_ANOTHER',
+                                    {'secure': 'API_KEY="SUPER_INSECURE_KEY"'}]})])
+
+        with open('file.yml', 'w') as file:
+            ordered_dump(initial_data, file)
+
+        result = runner.invoke(cli, ['--env', 'mandeep', 'Travis-Encrypt', 'file.yml'],
+                               'SUPER_SECURE_API_KEY')
+
+        assert not result.exception
+
+        with open('file.yml') as file:
+            config = ordered_load(file)
+
+        assert config['language'] == 'python'
+        assert config['dist'] == 'trusty'
+        assert ['language', 'dist', 'env'] == [key for key in config.keys()]
+
+        for item in config['env']['global']:
+            if 'secure' in item:
+                assert base64.b64decode(item['secure'])
