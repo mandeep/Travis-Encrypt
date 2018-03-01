@@ -5,6 +5,14 @@ Changelog
 All notable changes to this project will be documented in this file.
 
 
+1.0.0 - 2018-03-01
+==================
+
+Changed
+-------
+
+-  Increment version to 1.0.0 for stable release
+
 0.9.1 - 2018-01-27
 ==================
 

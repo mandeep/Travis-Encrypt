@@ -4,7 +4,7 @@ with open('README.rst') as file_object:
     description = file_object.read()
 
 setup(name='travis-encrypt',
-      version='0.9.1',
+      version='1.0.0',
       author='Mandeep',
       author_email='mandeep@keemail.me',
       url='https://github.com/mandeep/Travis-Encrypt',
@@ -23,7 +23,7 @@ setup(name='travis-encrypt',
         travis-encrypt=travis.cli:cli
         ''',
       classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.4',
