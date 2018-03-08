@@ -17,7 +17,8 @@ from travis.encrypt import (retrieve_public_key, encrypt_key,
 @click.option('--password', prompt=True, hide_input=True, confirmation_prompt=False, help="The password to be encrypted.")
 @click.option('--deploy', is_flag=True, help="Write to .travis.yml for deployment.")
 @click.option('--env', is_flag=True, help="Write to .travis.yml for environment variable use.")
-def cli(username, repository, path, password, deploy, env):
+@click.option('--clipboard', is_flag=True, help="Copy the encrypted password to the clipboard")
+def cli(username, repository, path, password, deploy, env, clipboard):
     """Encrypt passwords and environment variables for use with Travis CI.
 
     Travis Encrypt requires as arguments the user's GitHub username and repository name.
@@ -49,6 +50,9 @@ def cli(username, repository, path, password, deploy, env):
         dump_travis_configuration(config, path)
 
         print('Encrypted password added to {}' .format(path))
-
+    elif clipboard:
+        import pyperclip
+        pyperclip.copy(encrypted_password)
+        print('\nThe encrypted password has been copied to your clipboard.')
     else:
         print('\nPlease add the following to your .travis.yml:\nsecure: {}' .format(encrypted_password))
