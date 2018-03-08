@@ -42,6 +42,7 @@ With Travis Encrypt installed, the command line application can be invoked with 
         --help                  Show the help message and quit
         --deploy                Encrypt a password for continuous deployment usage
         --env                   Encrypt an environment variable
+        --clipboard             copy the encrypted password to the clipboard
 
 When the command is entered, the application will issue a prompt where the user can enter
 either a password or environment variable. In both cases, the prompt will print 'Password:'.

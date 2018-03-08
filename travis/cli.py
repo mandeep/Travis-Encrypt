@@ -5,6 +5,7 @@ It imports functions found in Travis Encrypt's module in order to
 create the CLI.
 """
 import click
+import pyperclip
 
 from travis.encrypt import (retrieve_public_key, encrypt_key,
                             load_travis_configuration, dump_travis_configuration)
@@ -51,7 +52,6 @@ def cli(username, repository, path, password, deploy, env, clipboard):
 
         print('Encrypted password added to {}' .format(path))
     elif clipboard:
-        import pyperclip
         pyperclip.copy(encrypted_password)
         print('\nThe encrypted password has been copied to your clipboard.')
     else:
