@@ -12,6 +12,7 @@ test_environment_variable_nonempty_file -- test embedding an environment variabl
 import base64
 from collections import OrderedDict
 
+import pyperclip
 from click.testing import CliRunner
 
 from travis.cli import cli
@@ -201,3 +202,11 @@ def test_environment_variable_multiple_global_items():
         for item in config['env']['global']:
             if 'secure' in item:
                 assert base64.b64decode(item['secure'])
+
+def test_password_copied_to_clipboard():
+    runner = CliRunner()
+    result = runner.invoke(cli, ['--clipboard', 'mandeep', 'Travis-Encrypt'],
+                           'SUPER_SECURE_PASSWORD')
+    assert not result.exception
+    assert 'The encrypted password has been copied to your clipboard.' in result.output
+    assert base64.b64decode(pyperclip.paste())
