@@ -13,6 +13,8 @@ import base64
 from collections import OrderedDict
 
 import pyperclip
+import mock
+import pytest
 from click.testing import CliRunner
 
 from travis.cli import cli
@@ -212,3 +214,17 @@ def test_password_copied_to_clipboard():
     clip_contents = pyperclip.paste()
     assert clip_contents, 'Clipboard did not have any contents'
     assert base64.b64decode(clip_contents), 'The clipboard content could not be decoded: ' + repr(clip_contents)
+
+@pytest.mark.parametrize('expected_password', ['foo', 'bar', 'baz'])
+def test_clipboard_contains_password(expected_password):
+    with mock.patch('travis.cli.encrypt_key', return_value=expected_password) as mock_encrypt:
+        runner = CliRunner()
+        result = runner.invoke(cli, ['--clipboard', 'mandeep', 'Travis-Encrypt'],
+                               'SUPER_SECURE_PASSWORD')
+        assert mock_encrypt.called
+        assert not result.exception
+        assert 'The encrypted password has been copied to your clipboard.' in result.output
+        clip_contents = pyperclip.paste()
+        assert clip_contents, 'Clipboard did not have any contents'
+        assert clip_contents == expected_password, 'clipboard contained "{}" expected "{}"'.format(expected_password,
+                                                                                                   clip_contents)
