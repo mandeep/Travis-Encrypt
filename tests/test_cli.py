@@ -10,6 +10,7 @@ test_environment_variable_empty_file -- test embedding an environment variable i
 test_environment_variable_nonempty_file -- test embedding an environment variable in a nonempty file
 """
 import base64
+import string
 from collections import OrderedDict
 
 import pyperclip
@@ -215,7 +216,8 @@ def test_password_copied_to_clipboard():
     assert clip_contents, 'Clipboard did not have any contents'
     assert base64.b64decode(clip_contents), 'The clipboard content could not be decoded: ' + repr(clip_contents)
 
-@pytest.mark.parametrize('expected_password', ['foo', 'bar', 'baz'])
+
+@pytest.mark.parametrize('expected_password', [string.ascii_letters+string.digits, string.hexdigits, string.printable])
 def test_clipboard_contains_password(expected_password):
     with mock.patch('travis.cli.encrypt_key', return_value=expected_password) as mock_encrypt:
         runner = CliRunner()
