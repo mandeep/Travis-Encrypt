@@ -4,7 +4,7 @@ with open('README.rst') as file_object:
     description = file_object.read()
 
 setup(name='travis-encrypt',
-      version='1.0.0',
+      version='1.1.0',
       author='Mandeep',
       author_email='mandeep@keemail.me',
       url='https://github.com/mandeep/Travis-Encrypt',
@@ -16,7 +16,8 @@ setup(name='travis-encrypt',
         'click>=6.7',
         'cryptography>=1.9',
         'PyYAML>=3.12',
-        'requests>=2.18.1'
+        'requests>=2.18.1',
+        'pyperclip>=1.6.0'
       ],
       entry_points='''
         [console_scripts]
