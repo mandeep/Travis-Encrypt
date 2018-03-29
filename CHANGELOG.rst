@@ -5,6 +5,15 @@ Changelog
 All notable changes to this project will be documented in this file.
 
 
+1.1.0 - 2018-03-29
+==================
+
+Added
+-----
+
+-  Add ability to copy encrypted password to clipboard using the --clipboard flag (thanks @spyoungtech)
+
+
 1.0.0 - 2018-03-01
 ==================
 
