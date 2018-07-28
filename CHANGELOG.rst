@@ -4,6 +4,19 @@ Changelog
 
 All notable changes to this project will be documented in this file.
 
+1.1.1 - 2018-07-21
+==================
+
+Added
+-----
+
+-  Add docstrings to newest CLI test functions
+
+Changed
+-------
+
+-  Change license from GPLv3 to MIT
+
 
 1.1.0 - 2018-03-29
 ==================
@@ -142,7 +155,7 @@ Added
 Changed
 -------
 
--   Coverage report omits tests directory 
+-   Coverage report omits tests directory
 
 0.5.3 - 2017-04-19
 ==================

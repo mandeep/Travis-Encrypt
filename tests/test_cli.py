@@ -207,6 +207,7 @@ def test_environment_variable_multiple_global_items():
                 assert base64.b64decode(item['secure'])
 
 def test_password_copied_to_clipboard():
+    """Test the encrypt module's CLI function with the --clipboard flag."""
     runner = CliRunner()
     result = runner.invoke(cli, ['--clipboard', 'mandeep', 'Travis-Encrypt'],
                            'SUPER_SECURE_PASSWORD')
@@ -219,6 +220,7 @@ def test_password_copied_to_clipboard():
 
 @pytest.mark.parametrize('expected_password', [string.ascii_letters+string.digits, string.hexdigits, string.printable])
 def test_clipboard_contains_password(expected_password):
+    """Test that a password is correctly copied to the clipboard."""
     with mock.patch('travis.cli.encrypt_key', return_value=expected_password) as mock_encrypt:
         runner = CliRunner()
         result = runner.invoke(cli, ['--clipboard', 'mandeep', 'Travis-Encrypt'],
@@ -228,5 +230,4 @@ def test_clipboard_contains_password(expected_password):
         assert 'The encrypted password has been copied to your clipboard.' in result.output
         clip_contents = pyperclip.paste()
         assert clip_contents, 'Clipboard did not have any contents'
-        assert clip_contents == expected_password, 'clipboard contained "{}" expected "{}"'.format(expected_password,
-                                                                                                   clip_contents)
+        assert clip_contents == expected_password, 'clipboard contained "{}" expected "{}"'.format(expected_password, clip_contents)
