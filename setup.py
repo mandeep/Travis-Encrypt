@@ -17,7 +17,7 @@ setup(name='travis-encrypt',
           'cryptography>=2.3',
           'PyYAML>=3.12',
           'requests>=2.19.1',
-          'pyperclip>=1.6.4'
+          'pyperclip==1.6.0'
       ],
       entry_points='''
           [console_scripts]
