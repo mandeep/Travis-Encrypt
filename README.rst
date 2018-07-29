@@ -1,6 +1,6 @@
 .. image:: header.png
 
-|travis| |coverage| |dependencies| |scrutinizer| |format| |version| |license| |pyversions| |implementation| |status|
+|travis| |coverage| |dependencies| |format| |version| |license| |pyversions| |implementation| |status|
 
 
 Travis Encrypt is a Python command line application that provides an easy way to encrypt passwords
@@ -55,7 +55,7 @@ Example of password encryption (the password is hidden when entering)::
     $  travis-encrypt mandeep Travis-Encrypt
     Password:
     Please add the following to your .travis.yml:
-    
+
     secure: "oxTYla2fHNRRjD0akv1e..." (edited for brevity)
 
 Example of deployment password encryption::
@@ -73,11 +73,9 @@ Example of encrypting the environment variable API_TOKEN="abc123"::
 .. |travis| image:: https://img.shields.io/travis/mandeep/Travis-Encrypt/master.svg?style=flat-square
     :target: https://travis-ci.org/mandeep/Travis-Encrypt
 .. |coverage| image:: https://img.shields.io/coveralls/mandeep/Travis-Encrypt.svg?style=flat-square
-    :target: https://coveralls.io/github/mandeep/Travis-Encrypt 
+    :target: https://coveralls.io/github/mandeep/Travis-Encrypt
 .. |dependencies| image:: https://img.shields.io/librariesio/github/mandeep/Travis-Encrypt.svg?style=flat-square
     :target: https://dependencyci.com/github/mandeep/Travis-Encrypt
-.. |scrutinizer| image:: https://img.shields.io/scrutinizer/g/mandeep/Travis-Encrypt.svg?style=flat-square
-    :target: https://scrutinizer-ci.com/g/mandeep/Travis-Encrypt/?branch=master
 .. |version| image:: https://img.shields.io/pypi/v/travis-encrypt.svg?style=flat-square
     :target: https://pypi.python.org/pypi/travis-encrypt
 .. |implementation| image:: https://img.shields.io/pypi/implementation/travis-encrypt.svg?style=flat-square
