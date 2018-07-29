@@ -4,6 +4,15 @@ Changelog
 
 All notable changes to this project will be documented in this file.
 
+1.1.2 - 2018-07-29
+==================
+
+Changed
+-------
+
+-  Removed Scrutinizer CI as its code analysis tools no longer work
+
+
 1.1.1 - 2018-07-21
 ==================
 
