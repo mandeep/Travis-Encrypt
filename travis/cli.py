@@ -20,10 +20,7 @@ class NotRequiredIf(click.Option):
     def __init__(self, *args, **kwargs):
         self.not_required_if = kwargs.pop('not_required_if')
         assert self.not_required_if, "'not_required_if' parameter required"
-        kwargs['help'] = (kwargs.get('help', '') +
-            ' NOTE: This argument is mutually exclusive with %s' %
-            self.not_required_if
-        ).strip()
+        kwargs['help'] = (kwargs.get('help', '') + ' Mutually exclusive with %s' % self.not_required_if).strip()
         super(NotRequiredIf, self).__init__(*args, **kwargs)
 
     def handle_parse_result(self, ctx, opts, args):
@@ -33,23 +30,24 @@ class NotRequiredIf(click.Option):
         if other_present:
             if we_are_present:
                 raise click.UsageError(
-                    "Illegal usage: `%s` is mutually exclusive with `%s`" % (
-                        self.name, self.not_required_if))
+                    "Illegal usage: `%s` is mutually exclusive with `%s`" % (self.name, self.not_required_if))
             else:
                 self.prompt = None
 
-        return super(NotRequiredIf, self).handle_parse_result(
-            ctx, opts, args)
+        return super(NotRequiredIf, self).handle_parse_result(ctx, opts, args)
 
 @click.command()
 @click.argument('username')
 @click.argument('repository')
 @click.argument('path', type=click.Path(exists=True), required=False)
-@click.option('--password', cls=NotRequiredIf, not_required_if='env_file', prompt=True, hide_input=True, confirmation_prompt=False, help="The password to be encrypted.")
+@click.option('--password', cls=NotRequiredIf,
+              not_required_if='env_file', prompt=True,
+              hide_input=True, confirmation_prompt=False,
+              help="The password to be encrypted.")
 @click.option('--deploy', is_flag=True, help="Write to .travis.yml for deployment.")
 @click.option('--env', is_flag=True, help="Write to .travis.yml for environment variable use.")
 @click.option('--clipboard', is_flag=True, help="Copy the encrypted password to the clipboard")
-@click.option('--env-file', type=click.Path(exists=True))
+@click.option('--env-file', type=click.Path(exists=True), help='Path for a .env file containing variables to encrypt')
 def cli(username, repository, path, password, deploy, env, clipboard, env_file):
     """Encrypt passwords and environment variables for use with Travis CI.
 
