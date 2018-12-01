@@ -66,6 +66,7 @@ def cli(username, repository, path, password, deploy, env, clipboard, env_file):
                 encrypted_env = encrypt_key(key, value.encode())
                 config.setdefault('env', {}).setdefault('global', {})[env_var] = {'secure': encrypted_env}
             dump_travis_configuration(config, path)
+            print('Encrypted variables from {} added to {}'.format(env_file, path))
         else:
             print('\nPlease add the following to your .travis.yml:')
             for env_var, value in dotenv_values(env_file).items():
