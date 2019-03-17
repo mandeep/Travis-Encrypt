@@ -13,8 +13,7 @@ from travis.encrypt import (retrieve_public_key, encrypt_key,
 
 
 class NotRequiredIf(click.Option):
-    """
-    Make option not required if another option is present
+    """Make option not required if another option is present.
     https://stackoverflow.com/a/44349292/5747944
     """
     def __init__(self, *args, **kwargs):
@@ -35,6 +34,7 @@ class NotRequiredIf(click.Option):
                 self.prompt = None
 
         return super(NotRequiredIf, self).handle_parse_result(ctx, opts, args)
+
 
 @click.command()
 @click.argument('username')
@@ -58,6 +58,7 @@ def cli(username, repository, path, password, deploy, env, clipboard, env_file):
     is given as an argument, the encrypted password is added to the .travis.yml file.
     """
     key = retrieve_public_key('{}/{}' .format(username, repository))
+
     if env_file:
         if path:
             config = load_travis_configuration(path)
@@ -72,32 +73,31 @@ def cli(username, repository, path, password, deploy, env, clipboard, env_file):
             for env_var, value in dotenv_values(env_file).items():
                 encrypted_env = encrypt_key(key, value.encode())
                 print("{}:\n  secure: {}".format(env_var, encrypted_env))
-        return
-
-    encrypted_password = encrypt_key(key, password.encode())
-
-    if path:
-        config = load_travis_configuration(path)
-
-        if deploy:
-            config.setdefault('deploy', {}).setdefault('password', {})['secure'] = encrypted_password
-
-        elif env:
-            try:
-                config.setdefault('env', {}).setdefault('global', {})['secure'] = encrypted_password
-            except TypeError:
-                for item in config['env']['global']:
-                    if isinstance(item, dict) and 'secure' in item:
-                        item['secure'] = encrypted_password
-
-        else:
-            config.setdefault('password', {})['secure'] = encrypted_password
-
-        dump_travis_configuration(config, path)
-
-        print('Encrypted password added to {}' .format(path))
-    elif clipboard:
-        pyperclip.copy(encrypted_password)
-        print('\nThe encrypted password has been copied to your clipboard.')
     else:
-        print('\nPlease add the following to your .travis.yml:\nsecure: {}' .format(encrypted_password))
+        encrypted_password = encrypt_key(key, password.encode())
+
+        if path:
+            config = load_travis_configuration(path)
+
+            if deploy:
+                config.setdefault('deploy', {}).setdefault('password', {})['secure'] = encrypted_password
+
+            elif env:
+                try:
+                    config.setdefault('env', {}).setdefault('global', {})['secure'] = encrypted_password
+                except TypeError:
+                    for item in config['env']['global']:
+                        if isinstance(item, dict) and 'secure' in item:
+                            item['secure'] = encrypted_password
+
+            else:
+                config.setdefault('password', {})['secure'] = encrypted_password
+
+            dump_travis_configuration(config, path)
+
+            print('Encrypted password added to {}' .format(path))
+        elif clipboard:
+            pyperclip.copy(encrypted_password)
+            print('\nThe encrypted password has been copied to your clipboard.')
+        else:
+            print('\nPlease add the following to your .travis.yml:\nsecure: {}' .format(encrypted_password))

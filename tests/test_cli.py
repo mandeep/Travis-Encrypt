@@ -17,6 +17,7 @@ import pyperclip
 import mock
 import pytest
 from click.testing import CliRunner
+from dotenv import dotenv_values
 
 from travis.cli import cli
 from travis.orderer import ordered_load, ordered_dump
@@ -231,3 +232,46 @@ def test_clipboard_contains_password(expected_password):
         clip_contents = pyperclip.paste()
         assert clip_contents, 'Clipboard did not have any contents'
         assert clip_contents == expected_password, 'clipboard contained "{}" expected "{}"'.format(expected_password, clip_contents)
+
+
+def test_dotenv_file():
+    """Test the --env-file CLI option with a dotenv file.
+
+    The output from the encryption will be printed to stdout."""
+    runner = CliRunner()
+    with runner.isolated_filesystem():
+        with open('test.env', 'w') as env_file:
+            env_file.write("SECRET_KEY=MY_PASSWORD")
+
+        api_key = dotenv_values('tests/test.env')
+        result = runner.invoke(cli, ['mandeep', 'Travis-Encrypt', '--env-file=test.env'])
+
+        assert not result.exception
+        assert '\nPlease add the following to your .travis.yml:\nSECRET_KEY:\n' in result.output
+        assert base64.b64decode(result.output.split()[-1])
+
+
+def test_dotenv_empty_file():
+    """Test the --env-file CLI option with a dotenv file and a YAML file.
+
+    The API key from the dotenv file will be added to the YAML configuration file.
+    """
+    runner = CliRunner()
+    with runner.isolated_filesystem():
+        with open('test.env', 'w') as env_file:
+            env_file.write("API_KEY=MY_PASSWORD")
+
+        initial_data = {'language': 'python'}
+        with open('file.yml', 'w') as file:
+            ordered_dump(initial_data, file)
+
+        result = runner.invoke(cli, ['mandeep', 'Travis-Encrypt',
+                                     'file.yml', '--env-file=test.env'])
+        assert not result.exception
+
+        with open('file.yml') as file:
+            config = ordered_load(file)
+            assert 'env' in config
+            assert 'global' in config['env']
+            assert config['language'] == 'python'
+            assert base64.b64decode(config['env']['global']['API_KEY']['secure'])
