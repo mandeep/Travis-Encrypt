@@ -17,7 +17,6 @@ import pyperclip
 import mock
 import pytest
 from click.testing import CliRunner
-from dotenv import dotenv_values
 
 from travis.cli import cli
 from travis.orderer import ordered_load, ordered_dump
@@ -243,7 +242,6 @@ def test_dotenv_file():
         with open('test.env', 'w') as env_file:
             env_file.write("SECRET_KEY=MY_PASSWORD")
 
-        api_key = dotenv_values('tests/test.env')
         result = runner.invoke(cli, ['mandeep', 'Travis-Encrypt', '--env-file=test.env'])
 
         assert not result.exception
