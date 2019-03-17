@@ -35,9 +35,11 @@ before_script:
   - sleep 3 # give xvfb some time to start
 
 install:
-  - pip install cryptography pytest pytest-cov six mock
+  - pip install cryptography pytest pytest-cov six mock coveralls --upgrade
   - python setup.py install
 
 script:
   - pytest -v --cov=.
 
+after_success:
+  - coveralls
