@@ -13,12 +13,12 @@ setup(name='travis-encrypt',
       license='MIT',
       packages=['travis'],
       install_requires=[
-          'click>=6.7',
-          'cryptography>=2.3',
-          'PyYAML>=3.12',
-          'requests>=2.19.1',
-          'pyperclip==1.6.0',
-          'python-dotenv>=0.9.1'
+          'click>=7.0',
+          'cryptography>=2.6',
+          'PyYAML>=5.1',
+          'requests>=2.21',
+          'pyperclip==1.7',
+          'python-dotenv>=0.10'
       ],
       entry_points='''
           [console_scripts]
