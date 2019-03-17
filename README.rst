@@ -43,6 +43,7 @@ With Travis Encrypt installed, the command line application can be invoked with 
         --deploy                Encrypt a password for continuous deployment usage
         --env                   Encrypt an environment variable
         --clipboard             copy the encrypted password to the clipboard
+        --env-file PATH         Path for a .env file containing variables to encrypt
 
 When the command is entered, the application will issue a prompt where the user can enter
 either a password or environment variable. In both cases, the prompt will print 'Password:'.
@@ -69,6 +70,11 @@ Example of encrypting the environment variable API_TOKEN="abc123"::
     $  travis-encrypt --env mandeep Travis-Encrypt /home/user/.travis.yml
     Password:
     Encrypted password added to /home/user/.travis.yml
+
+Example of using a .env file::
+
+    $  travis-encrypt --env-file /home/user/my.env mandeep Travis-Encrypt /home/user/.travis.yml
+    Encrypted variables from /home/user/my.env added to /home/user/.travis.yml
 
 .. |travis| image:: https://img.shields.io/travis/mandeep/Travis-Encrypt/master.svg?style=flat-square
     :target: https://travis-ci.org/mandeep/Travis-Encrypt
