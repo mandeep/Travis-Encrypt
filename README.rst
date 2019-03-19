@@ -1,6 +1,6 @@
 .. image:: header.png
 
-|travis| |coverage| |dependencies| |format| |version| |license| |pyversions| |implementation| |status|
+|travis| |coverage| |format| |version| |license| |pyversions| |implementation| |status|
 
 
 Travis Encrypt is a Python command line application that provides an easy way to encrypt passwords
@@ -80,8 +80,6 @@ Example of using a .env file::
     :target: https://travis-ci.org/mandeep/Travis-Encrypt
 .. |coverage| image:: https://img.shields.io/coveralls/mandeep/Travis-Encrypt.svg?style=flat-square
     :target: https://coveralls.io/github/mandeep/Travis-Encrypt
-.. |dependencies| image:: https://img.shields.io/librariesio/github/mandeep/Travis-Encrypt.svg?style=flat-square
-    :target: https://dependencyci.com/github/mandeep/Travis-Encrypt
 .. |version| image:: https://img.shields.io/pypi/v/travis-encrypt.svg?style=flat-square
     :target: https://pypi.python.org/pypi/travis-encrypt
 .. |implementation| image:: https://img.shields.io/pypi/implementation/travis-encrypt.svg?style=flat-square
