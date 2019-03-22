@@ -4,6 +4,8 @@ This module represents the command line interface to Travis Encrypt.
 It imports functions found in Travis Encrypt's module in order to
 create the CLI.
 """
+from collections import OrderedDict
+
 import click
 from dotenv import dotenv_values
 import pyperclip
@@ -91,6 +93,8 @@ def cli(username, repository, path, password, deploy, env, clipboard, env_file):
                             item['secure'] = encrypted_password
 
             else:
+                if config is None:
+                    config = OrderedDict()
                 config.setdefault('password', {})['secure'] = encrypted_password
 
             dump_travis_configuration(config, path)

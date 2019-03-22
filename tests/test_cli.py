@@ -36,20 +36,16 @@ def test_password_empty_file():
     """Test the encrypt module's CLI function with an empty YAML file."""
     runner = CliRunner()
     with runner.isolated_filesystem():
-        initial_data = {'language': 'python'}
         with open('file.yml', 'w') as file:
-            ordered_dump(initial_data, file)
 
-        result = runner.invoke(cli, ['mandeep', 'Travis-Encrypt', 'file.yml'],
-                               'SUPER_SECURE_PASSWORD')
-        assert not result.exception
+            result = runner.invoke(cli, ['mandeep', 'Travis-Encrypt', 'file.yml'],
+                                   'SUPER_SECURE_PASSWORD')
+            assert not result.exception
 
         with open('file.yml') as file:
             config = ordered_load(file)
 
-            assert 'password' in config
             assert 'secure' in config['password']
-            assert config['language'] == 'python'
             assert base64.b64decode(config['password']['secure'])
 
 
