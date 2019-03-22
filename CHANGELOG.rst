@@ -4,6 +4,15 @@ Changelog
 
 All notable changes to this project will be documented in this file.
 
+1.2.2 - 2019-03-22
+==================
+
+Fixed
+-----
+
+-  Fixed exception being thrown when travis.yml configuration file is empty (for all CLI flags)
+
+
 1.2.1 - 2019-03-22
 ==================
 
