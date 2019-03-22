@@ -31,7 +31,7 @@ class NotRequiredIf(click.Option):
         if other_present:
             if we_are_present:
                 raise click.UsageError(
-                    "Illegal usage: `%s` flag cannot be used with `%s` flag" % (self.name, self.not_required_if))
+                    "Illegal usage: `%s` flag cannot be used with `%s` flag." % (self.name, self.not_required_if))
             else:
                 self.prompt = None
 

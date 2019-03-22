@@ -269,3 +269,23 @@ def test_dotenv_empty_file():
             assert 'global' in config['env']
             assert config['language'] == 'python'
             assert base64.b64decode(config['env']['global']['API_KEY']['secure'])
+
+
+def test_dotenv_mutually_exclusive():
+    """Test the --env-file CLI option along with the --password option.
+
+    The --password flag will also be passed to make sure that an exception is thrown.
+    """
+    runner = CliRunner()
+    with runner.isolated_filesystem():
+        with open('test.env', 'w') as env_file:
+            env_file.write("API_KEY=MY_PASSWORD")
+
+        initial_data = {'language': 'python'}
+        with open('file.yml', 'w') as file:
+            ordered_dump(initial_data, file)
+
+        result = runner.invoke(cli, ['mandeep', 'Travis-Encrypt',
+                                     'file.yml', '--env-file=test.env', '--password', 'TEST'])
+        assert 'Error: Illegal usage: `password` flag cannot be used with `env_file` flag.\n' in result.output
+        assert result.exception
