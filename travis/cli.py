@@ -80,6 +80,8 @@ def cli(username, repository, path, password, deploy, env, clipboard, env_file):
 
         if path:
             config = load_travis_configuration(path)
+            if config is None:
+                config = OrderedDict()
 
             if deploy:
                 config.setdefault('deploy', {}).setdefault('password', {})['secure'] = encrypted_password
@@ -93,8 +95,6 @@ def cli(username, repository, path, password, deploy, env, clipboard, env_file):
                             item['secure'] = encrypted_password
 
             else:
-                if config is None:
-                    config = OrderedDict()
                 config.setdefault('password', {})['secure'] = encrypted_password
 
             dump_travis_configuration(config, path)
