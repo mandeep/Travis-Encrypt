@@ -4,6 +4,22 @@ Changelog
 
 All notable changes to this project will be documented in this file.
 
+1.2.1 - 2019-03-22
+==================
+
+Fixed
+-----
+
+-  Fixed exception being thrown when travis.yml configuration file is empty
+
+Changed
+-------
+
+-  Removed official Python 3.4 support
+-  Refactored InvalidCredentialsError message to be more clear
+-  Removed defunct dependencies badge from README
+
+
 1.2.0 - 2019-03-17
 ==================
 
