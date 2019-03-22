@@ -48,7 +48,8 @@ def retrieve_public_key(user_repo):
     try:
         return response.json()['key'].replace(' RSA ', ' ')
     except KeyError:
-        raise InvalidCredentialsError("Please enter a valid user/repository name.")
+        username, repository = user_repo.split('/')
+        raise InvalidCredentialsError("Either the username: '{}' or the repository: '{}' does not exist. Please enter a valid username or repository name. The username and repository name are both case sensitive." .format(username, repository))
 
 
 def encrypt_key(key, password):
