@@ -4,6 +4,15 @@ Changelog
 
 All notable changes to this project will be documented in this file.
 
+1.2.3 - 2019-03-23
+==================
+
+Changed
+-------
+
+-  Refactored error message to be more clear when both --env-file and --password flags are given
+
+
 1.2.2 - 2019-03-22
 ==================
 
