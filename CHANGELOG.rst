@@ -4,6 +4,15 @@ Changelog
 
 All notable changes to this project will be documented in this file.
 
+1.3.0 - 2019-04-30
+==================
+
+Added
+-----
+
+-  New --private flag allows access to travis-ci.com API endpoint for private repositories
+
+
 1.2.3 - 2019-03-23
 ==================
 
