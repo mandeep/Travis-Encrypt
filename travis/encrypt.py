@@ -5,7 +5,6 @@ retrieve_public_key -- retrieve the public key from the Travis CI API.
 encrypt_key -- load the public key and encrypt it with PKCSv15
 """
 import base64
-from json.decoder import JSONDecodeError
 
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric.padding import PKCS1v15
@@ -48,7 +47,7 @@ def retrieve_public_key(user_repo, url='https://api.travis-ci.org/repos'):
 
     try:
         return response.json()['key'].replace(' RSA ', ' ')
-    except (KeyError, JSONDecodeError):
+    except (KeyError, ValueError):
         username, repository = user_repo.split('/')
         raise InvalidCredentialsError("Either the username: '{}' or the repository: '{}' does not exist. Please enter a valid username or repository name. The username and repository name are both case sensitive." .format(username, repository))
 
