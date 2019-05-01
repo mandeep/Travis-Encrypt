@@ -5,6 +5,7 @@ retrieve_public_key -- retrieve the public key from the Travis CI API.
 encrypt_key -- load the public key and encrypt it with PKCSv15
 """
 import base64
+from json.decoder import JSONDecodeError
 
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric.padding import PKCS1v15
@@ -18,7 +19,7 @@ class InvalidCredentialsError(Exception):
     """Error raised when a username or repository does not exist."""
 
 
-def retrieve_public_key(user_repo):
+def retrieve_public_key(user_repo, url='https://api.travis-ci.org/repos'):
     """Retrieve the public key from the Travis API.
 
     The Travis API response is accessed as JSON so that Travis-Encrypt
@@ -42,12 +43,12 @@ def retrieve_public_key(user_repo):
     InvalidCredentialsError
         raised when an invalid 'username/repository' is given
     """
-    url = 'https://api.travis-ci.org/repos/{}/key' .format(user_repo)
+    url = '{}/{}/key' .format(url, user_repo)
     response = requests.get(url)
 
     try:
         return response.json()['key'].replace(' RSA ', ' ')
-    except KeyError:
+    except (KeyError, JSONDecodeError):
         username, repository = user_repo.split('/')
         raise InvalidCredentialsError("Either the username: '{}' or the repository: '{}' does not exist. Please enter a valid username or repository name. The username and repository name are both case sensitive." .format(username, repository))
 
