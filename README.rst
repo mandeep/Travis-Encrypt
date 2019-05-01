@@ -44,6 +44,7 @@ With Travis Encrypt installed, the command line application can be invoked with 
         --env                   Encrypt an environment variable
         --clipboard             copy the encrypted password to the clipboard
         --env-file PATH         Path for a .env file containing variables to encrypt
+        --private               Use the travis-ci.com API endpoint for private repositories
 
 When the command is entered, the application will issue a prompt where the user can enter
 either a password or environment variable. In both cases, the prompt will print 'Password:'.
