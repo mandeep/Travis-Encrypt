@@ -62,9 +62,10 @@ def cli(username, repository, path, password, deploy, env, clipboard, env_file, 
     """
     if private:
         url = 'https://api.travis-ci.com/repos'
-        key = retrieve_public_key('{}/{}' .format(username, repository), url)
     else:
-        key = retrieve_public_key('{}/{}' .format(username, repository))
+        url = 'https://api.travis-ci.org/repos'
+
+    key = retrieve_public_key('{}/{}' .format(username, repository), url)
 
     if env_file:
         if path:
