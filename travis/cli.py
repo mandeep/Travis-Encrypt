@@ -46,11 +46,12 @@ class NotRequiredIf(click.Option):
               not_required_if='env_file', prompt=True,
               hide_input=True, confirmation_prompt=False,
               help="The password to be encrypted.")
-@click.option('--deploy', is_flag=True, help="Write to .travis.yml for deployment.")
-@click.option('--env', is_flag=True, help="Write to .travis.yml for environment variable use.")
+@click.option('--deploy', is_flag=True, help="Write to .travis.yml for deployment")
+@click.option('--env', is_flag=True, help="Write to .travis.yml for environment variable use")
 @click.option('--clipboard', is_flag=True, help="Copy the encrypted password to the clipboard")
 @click.option('--env-file', type=click.Path(exists=True), help='Path for a .env file containing variables to encrypt')
-def cli(username, repository, path, password, deploy, env, clipboard, env_file):
+@click.option('--private', is_flag=True, help='Use the travis-ci.com API endpoint for private repositories')
+def cli(username, repository, path, password, deploy, env, clipboard, env_file, private):
     """Encrypt passwords and environment variables for use with Travis CI.
 
     Travis Encrypt requires as arguments the user's GitHub username and repository name.
@@ -59,7 +60,11 @@ def cli(username, repository, path, password, deploy, env, clipboard, env_file):
     scheme and printed to standard output. If the path to a .travis.yml file
     is given as an argument, the encrypted password is added to the .travis.yml file.
     """
-    key = retrieve_public_key('{}/{}' .format(username, repository))
+    if private:
+        url = 'https://api.travis-ci.com/repos'
+        key = retrieve_public_key('{}/{}' .format(username, repository), url)
+    else:
+        key = retrieve_public_key('{}/{}' .format(username, repository))
 
     if env_file:
         if path:
