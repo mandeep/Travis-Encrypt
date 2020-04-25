@@ -5,7 +5,7 @@ with open("README.rst") as file_object:
 
 setup(
     name="travis-encrypt",
-    version="1.3.1",
+    version="1.4.0",
     author="Mandeep",
     author_email="mandeep@keemail.me",
     url="https://github.com/mandeep/Travis-Encrypt",
