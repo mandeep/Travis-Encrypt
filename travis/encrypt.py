@@ -18,7 +18,7 @@ class InvalidCredentialsError(Exception):
     """Error raised when a username or repository does not exist."""
 
 
-def retrieve_public_key(user_repo, url='https://api.travis-ci.org/repos'):
+def retrieve_public_key(user_repo, url='https://api.travis-ci.org/repos', token=None):
     """Retrieve the public key from the Travis API.
 
     The Travis API response is accessed as JSON so that Travis-Encrypt
@@ -42,8 +42,18 @@ def retrieve_public_key(user_repo, url='https://api.travis-ci.org/repos'):
     InvalidCredentialsError
         raised when an invalid 'username/repository' is given
     """
-    url = '{}/{}/key' .format(url, user_repo)
-    response = requests.get(url)
+    if token:
+        response = requests.get(url, headers={'Authorization': 'token {}' .format(token)})
+
+        try:
+            return response.json()['public_key']
+        except (KeyError, ValueError):
+            username, repository = user_repo.split('/')
+            raise InvalidCredentialsError("Either the username: '{}' or the repository: '{}' does not exist. Please enter a valid username or repository name. The username and repository name are both case sensitive." .format(username, repository))
+
+    else:
+        url = '{}/{}/key' .format(url, user_repo)
+        response = requests.get(url)
 
     try:
         return response.json()['key'].replace(' RSA ', ' ')

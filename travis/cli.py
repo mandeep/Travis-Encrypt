@@ -51,7 +51,8 @@ class NotRequiredIf(click.Option):
 @click.option('--clipboard', is_flag=True, help="Copy the encrypted password to the clipboard")
 @click.option('--env-file', type=click.Path(exists=True), help='Path for a .env file containing variables to encrypt')
 @click.option('--private', is_flag=True, help='Use the travis-ci.com API endpoint for private repositories')
-def cli(username, repository, path, password, deploy, env, clipboard, env_file, private):
+@click.option('--token', help='Authenticate the API request with a travis-ci token.')
+def cli(username, repository, path, password, deploy, env, clipboard, env_file, private, token):
     """Encrypt passwords and environment variables for use with Travis CI.
 
     Travis Encrypt requires as arguments the user's GitHub username and repository name.
@@ -60,12 +61,19 @@ def cli(username, repository, path, password, deploy, env, clipboard, env_file, 
     scheme and printed to standard output. If the path to a .travis.yml file
     is given as an argument, the encrypted password is added to the .travis.yml file.
     """
-    if private:
-        url = 'https://api.travis-ci.com/repos'
+    if token:
+        url = 'https://api.travis-ci.org/v3/repo/{}%2f{}/key_pair/generated' .format(username, repository)
+        if private:
+            url = 'https://api.travis-ci.com/v3/repo/{}%2f{}/key_pair/generated' .format(username, repository)
+
+        key = retrieve_public_key('{}/{}' .format(username, repository), url, token=token)
+
     else:
         url = 'https://api.travis-ci.org/repos'
+        if private:
+            url = 'https://api.travis-ci.com/repos'
 
-    key = retrieve_public_key('{}/{}' .format(username, repository), url)
+        key = retrieve_public_key('{}/{}' .format(username, repository), url)
 
     if env_file:
         if path:
