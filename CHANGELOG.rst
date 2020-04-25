@@ -4,6 +4,15 @@ Changelog
 
 All notable changes to this project will be documented in this file.
 
+1.4.0 - 2020-04-25
+==================
+
+Added
+-----
+
+-  New --token flag allows users to query the API v3 endpoint with a travis-ci token
+
+
 1.3.0 - 2019-04-30
 ==================
 
