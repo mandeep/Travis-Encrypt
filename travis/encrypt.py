@@ -18,7 +18,7 @@ class InvalidCredentialsError(Exception):
     """Error raised when a username or repository does not exist."""
 
 
-def retrieve_public_key(user_repo, url='https://api.travis-ci.org/repos', token=None):
+def retrieve_public_key(user_repo, url="https://api.travis-ci.org/repos", token=None):
     """Retrieve the public key from the Travis API.
 
     The Travis API response is accessed as JSON so that Travis-Encrypt
@@ -43,23 +43,33 @@ def retrieve_public_key(user_repo, url='https://api.travis-ci.org/repos', token=
         raised when an invalid 'username/repository' is given
     """
     if token:
-        response = requests.get(url, headers={'Authorization': 'token {}' .format(token)})
+        response = requests.get(
+            url, headers={"Authorization": "token {}".format(token)}
+        )
 
         try:
-            return response.json()['public_key']
+            return response.json()["public_key"]
         except (KeyError, ValueError):
-            username, repository = user_repo.split('/')
-            raise InvalidCredentialsError("Either the username: '{}' or the repository: '{}' does not exist. Please enter a valid username or repository name. The username and repository name are both case sensitive." .format(username, repository))
+            username, repository = user_repo.split("/")
+            raise InvalidCredentialsError(
+                "Either the username: '{}' or the repository: '{}' does not exist. Please enter a valid username or repository name. The username and repository name are both case sensitive.".format(
+                    username, repository
+                )
+            )
 
     else:
-        url = '{}/{}/key' .format(url, user_repo)
+        url = "{}/{}/key".format(url, user_repo)
         response = requests.get(url)
 
     try:
-        return response.json()['key'].replace(' RSA ', ' ')
+        return response.json()["key"].replace(" RSA ", " ")
     except (KeyError, ValueError):
-        username, repository = user_repo.split('/')
-        raise InvalidCredentialsError("Either the username: '{}' or the repository: '{}' does not exist. Please enter a valid username or repository name. The username and repository name are both case sensitive." .format(username, repository))
+        username, repository = user_repo.split("/")
+        raise InvalidCredentialsError(
+            "Either the username: '{}' or the repository: '{}' does not exist. Please enter a valid username or repository name. The username and repository name are both case sensitive.".format(
+                username, repository
+            )
+        )
 
 
 def encrypt_key(key, password):
@@ -93,7 +103,7 @@ def encrypt_key(key, password):
     """
     public_key = load_pem_public_key(key.encode(), default_backend())
     encrypted_password = public_key.encrypt(password, PKCS1v15())
-    return base64.b64encode(encrypted_password).decode('ascii')
+    return base64.b64encode(encrypted_password).decode("ascii")
 
 
 def load_travis_configuration(path):
@@ -136,5 +146,5 @@ def dump_travis_configuration(config, path):
     -------
     None
     """
-    with open(path, 'w') as config_file:
-            ordered_dump(config, config_file, default_flow_style=False)
+    with open(path, "w") as config_file:
+        ordered_dump(config, config_file, default_flow_style=False)
