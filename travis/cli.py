@@ -10,26 +10,18 @@ import click
 from dotenv import dotenv_values
 import pyperclip
 
-from travis.encrypt import (
-    retrieve_public_key,
-    encrypt_key,
-    load_travis_configuration,
-    dump_travis_configuration,
-)
+from travis.encrypt import (retrieve_public_key, encrypt_key,
+                            load_travis_configuration, dump_travis_configuration)
 
 
 class NotRequiredIf(click.Option):
     """Make option not required if another option is present.
     https://stackoverflow.com/a/44349292/5747944
     """
-
     def __init__(self, *args, **kwargs):
-        self.not_required_if = kwargs.pop("not_required_if")
+        self.not_required_if = kwargs.pop('not_required_if')
         assert self.not_required_if, "'not_required_if' parameter required"
-        kwargs["help"] = (
-            kwargs.get("help", "")
-            + " Mutually exclusive with %s" % self.not_required_if
-        ).strip()
+        kwargs['help'] = (kwargs.get('help', '') + ' Mutually exclusive with %s' % self.not_required_if).strip()
         super(NotRequiredIf, self).__init__(*args, **kwargs)
 
     def handle_parse_result(self, ctx, opts, args):
@@ -39,9 +31,7 @@ class NotRequiredIf(click.Option):
         if other_present:
             if we_are_present:
                 raise click.UsageError(
-                    "Illegal usage: `%s` flag cannot be used with `%s` flag."
-                    % (self.name, self.not_required_if)
-                )
+                    "Illegal usage: `%s` flag cannot be used with `%s` flag." % (self.name, self.not_required_if))
             else:
                 self.prompt = None
 
@@ -49,48 +39,20 @@ class NotRequiredIf(click.Option):
 
 
 @click.command()
-@click.argument("username")
-@click.argument("repository")
-@click.argument("path", type=click.Path(exists=True), required=False)
-@click.option(
-    "--password",
-    cls=NotRequiredIf,
-    not_required_if="env_file",
-    prompt=True,
-    hide_input=True,
-    confirmation_prompt=False,
-    help="The password to be encrypted.",
-)
-@click.option("--deploy", is_flag=True, help="Write to .travis.yml for deployment")
-@click.option(
-    "--env", is_flag=True, help="Write to .travis.yml for environment variable use"
-)
-@click.option(
-    "--clipboard", is_flag=True, help="Copy the encrypted password to the clipboard"
-)
-@click.option(
-    "--env-file",
-    type=click.Path(exists=True),
-    help="Path for a .env file containing variables to encrypt",
-)
-@click.option(
-    "--private",
-    is_flag=True,
-    help="Use the travis-ci.com API endpoint for private repositories",
-)
-@click.option("--token", help="Authenticate the API request with a travis-ci token.")
-def cli(
-    username,
-    repository,
-    path,
-    password,
-    deploy,
-    env,
-    clipboard,
-    env_file,
-    private,
-    token,
-):
+@click.argument('username')
+@click.argument('repository')
+@click.argument('path', type=click.Path(exists=True), required=False)
+@click.option('--password', cls=NotRequiredIf,
+              not_required_if='env_file', prompt=True,
+              hide_input=True, confirmation_prompt=False,
+              help="The password to be encrypted.")
+@click.option('--deploy', is_flag=True, help="Write to .travis.yml for deployment")
+@click.option('--env', is_flag=True, help="Write to .travis.yml for environment variable use")
+@click.option('--clipboard', is_flag=True, help="Copy the encrypted password to the clipboard")
+@click.option('--env-file', type=click.Path(exists=True), help='Path for a .env file containing variables to encrypt')
+@click.option('--private', is_flag=True, help='Use the travis-ci.com API endpoint for private repositories')
+@click.option('--token', help='Authenticate the API request with a travis-ci token.')
+def cli(username, repository, path, password, deploy, env, clipboard, env_file, private, token):
     """Encrypt passwords and environment variables for use with Travis CI.
 
     Travis Encrypt requires as arguments the user's GitHub username and repository name.
@@ -100,24 +62,18 @@ def cli(
     is given as an argument, the encrypted password is added to the .travis.yml file.
     """
     if token:
-        url = "https://api.travis-ci.org/v3/repo/{}%2f{}/key_pair/generated".format(
-            username, repository
-        )
+        url = 'https://api.travis-ci.org/v3/repo/{}%2f{}/key_pair/generated' .format(username, repository)
         if private:
-            url = "https://api.travis-ci.com/v3/repo/{}%2f{}/key_pair/generated".format(
-                username, repository
-            )
+            url = 'https://api.travis-ci.com/v3/repo/{}%2f{}/key_pair/generated' .format(username, repository)
 
-        key = retrieve_public_key(
-            "{}/{}".format(username, repository), url, token=token
-        )
+        key = retrieve_public_key('{}/{}' .format(username, repository), url, token=token)
 
     else:
-        url = "https://api.travis-ci.org/repos"
+        url = 'https://api.travis-ci.org/repos'
         if private:
-            url = "https://api.travis-ci.com/repos"
+            url = 'https://api.travis-ci.com/repos'
 
-        key = retrieve_public_key("{}/{}".format(username, repository), url)
+        key = retrieve_public_key('{}/{}' .format(username, repository), url)
 
     if env_file:
         if path:
@@ -125,13 +81,11 @@ def cli(
 
             for env_var, value in dotenv_values(env_file).items():
                 encrypted_env = encrypt_key(key, value.encode())
-                config.setdefault("env", {}).setdefault("global", {})[env_var] = {
-                    "secure": encrypted_env
-                }
+                config.setdefault('env', {}).setdefault('global', {})[env_var] = {'secure': encrypted_env}
             dump_travis_configuration(config, path)
-            print("Encrypted variables from {} added to {}".format(env_file, path))
+            print('Encrypted variables from {} added to {}'.format(env_file, path))
         else:
-            print("\nPlease add the following to your .travis.yml:")
+            print('\nPlease add the following to your .travis.yml:')
             for env_var, value in dotenv_values(env_file).items():
                 encrypted_env = encrypt_key(key, value.encode())
                 print("{}:\n  secure: {}".format(env_var, encrypted_env))
@@ -144,32 +98,24 @@ def cli(
                 config = OrderedDict()
 
             if deploy:
-                config.setdefault("deploy", {}).setdefault("password", {})[
-                    "secure"
-                ] = encrypted_password
+                config.setdefault('deploy', {}).setdefault('password', {})['secure'] = encrypted_password
 
             elif env:
                 try:
-                    config.setdefault("env", {}).setdefault("global", {})[
-                        "secure"
-                    ] = encrypted_password
+                    config.setdefault('env', {}).setdefault('global', {})['secure'] = encrypted_password
                 except TypeError:
-                    for item in config["env"]["global"]:
-                        if isinstance(item, dict) and "secure" in item:
-                            item["secure"] = encrypted_password
+                    for item in config['env']['global']:
+                        if isinstance(item, dict) and 'secure' in item:
+                            item['secure'] = encrypted_password
 
             else:
-                config.setdefault("password", {})["secure"] = encrypted_password
+                config.setdefault('password', {})['secure'] = encrypted_password
 
             dump_travis_configuration(config, path)
 
-            print("Encrypted password added to {}".format(path))
+            print('Encrypted password added to {}' .format(path))
         elif clipboard:
             pyperclip.copy(encrypted_password)
-            print("\nThe encrypted password has been copied to your clipboard.")
+            print('\nThe encrypted password has been copied to your clipboard.')
         else:
-            print(
-                "\nPlease add the following to your .travis.yml:\nsecure: {}".format(
-                    encrypted_password
-                )
-            )
+            print('\nPlease add the following to your .travis.yml:\nsecure: {}' .format(encrypted_password))
