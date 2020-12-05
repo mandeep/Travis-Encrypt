@@ -14,12 +14,12 @@ setup(
     license="MIT",
     packages=["travis"],
     install_requires=[
-        "click>=7.0",
-        "cryptography>=2.6",
-        "PyYAML>=5.1",
-        "requests>=2.21",
-        "pyperclip==1.7",
-        "python-dotenv>=0.10",
+        "click~=7.1",
+        "cryptography~=3.2",
+        "PyYAML~=5.3",
+        "requests~=2.25",
+        "pyperclip~=1.8",
+        "python-dotenv>=0.15",
     ],
     entry_points="""
           [console_scripts]
@@ -28,12 +28,10 @@ setup(
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "License :: OSI Approved :: MIT License",
-        "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: Implementation :: CPython",
-        "Programming Language :: Python :: Implementation :: PyPy",
     ],
     data_files=[("", ["LICENSE"])],
 )
